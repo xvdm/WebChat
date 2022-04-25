@@ -23,6 +23,11 @@ namespace WebChatExam.Controllers
             return View();
         }
 
+        public IActionResult Authorization()
+        {
+            return View();
+        }
+
         public IActionResult Settings()
         {
             return View();
