@@ -18,12 +18,12 @@ namespace WebChatExam.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Chats()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Settings()
         {
             return View();
         }
