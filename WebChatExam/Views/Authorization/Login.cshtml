@@ -11,10 +11,33 @@
         <title>@ViewData["Title"]</title>
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/authorization.css" />
     </head>
-    <body class="bg-secondary">
+    <body>
         <div class="text-center">
             <br />
+            <form>
+                <div class="container forms">
+                    <h1>Login</h1>
+                    <p>Please fill in this form to log into account.</p>
+                    <hr>
+
+                    <label for="login"><b>Login</b></label>
+                    <input type="text" placeholder="Enter Login" name="login" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+
+                    <hr>
+
+                    <button type="submit" class="registerbtn">Login</button>
+                </div>
+
+                <div class="container signin">
+                    <p>Don't have an account?</p>
+                    <a asp-controller="Authorization" asp-action="Register">Register</a>
+                </div>
+            </form>
         </div>
     </body>
 </html>
