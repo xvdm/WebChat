@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using WebChatExam.Models;
 
 namespace WebChatExam.Controllers
@@ -49,7 +50,13 @@ namespace WebChatExam.Controllers
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Home", "Chats");
+                var user = _context.Users.FirstOrDefault(x => x.Login == loginModel.Login && x.PasswodHash == CalculateHash(loginModel.Password).ToString());
+                if (user == null)
+                {
+                    var error = new ErrorViewModel();
+                    return View("Error", error);
+                }
+                return RedirectToAction("Chats", "Home");
             }
             else
             {
