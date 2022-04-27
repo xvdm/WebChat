@@ -1,6 +1,7 @@
-﻿@{
+﻿@model RegisterModel
+@{
     ViewData["Title"] = "Register";
-    Layout = null;
+    Layout = "_AuthorizationLayout";
 }
 
 <!DOCTYPE html>
@@ -16,30 +17,43 @@
     <body>
         <div class="text-center">
             <br />
-            <form>
+            <form asp-antiforgery="true" asp-controller="Authorization" asp-action="RegisterAction">
                 <div class="container forms">
                     <h1>Register</h1>
                     <p>Please fill in this form to create an account.</p>
                     <hr>
+                    <div>
+                        <label asp-for="Login"><b>Login</b></label>
+                        <input type="text" placeholder="Enter Login" asp-for="Login">
+                        <span asp-validation-for="Login"/>
+                    </div>
 
-                    <label for="login"><b>Login</b></label>
-                    <input type="text" placeholder="Enter Login" name="login" required>
+                    <div>
+                        <label asp-for="Password"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" asp-for="Password">
+                        <span asp-validation-for="Password"/>
+                    </div>
 
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
-
-                    <label for="psw-repeat"><b>Repeat Password</b></label>
-                    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                    <div>
+                        <label asp-for="ConfirmPassword"><b>Confirm Password</b></label>
+                        <input type="password" placeholder="Confirm Password" asp-for="ConfirmPassword">
+                        <span asp-validation-for="ConfirmPassword"/>
+                    </div>
                     <hr>
 
                     <button type="submit" class="registerbtn">Register</button>
                 </div>
-
-                <div class="container signin">
-                    <p>Already have an account?</p>
-                    <a asp-controller="Authorization" asp-action="Login">Sign in</a>
-                </div>
             </form>
+            <div class="container signin">
+                <p>Already have an account?</p>
+                <a asp-controller="Authorization" asp-action="Login">Sign in</a>
+            </div>
         </div>
     </body>
 </html>
+
+
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
