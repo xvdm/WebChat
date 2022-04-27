@@ -50,7 +50,7 @@ namespace WebChatExam
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Authorization}/{action=Register}/{id?}");
+                    pattern: "{controller=Authorization}/{action=Login}/{id?}");
             });
         }
     }
