@@ -7,7 +7,7 @@ namespace WebChatExam.Models
         public DbSet<UserModel> Users { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
     }
 }

@@ -6,12 +6,12 @@ namespace WebChatExam.Controllers
 {
     public class AuthorizationController : Controller
     {
-        //private ApplicationContext _context;
+        private ApplicationContext _context;
 
-        //public AuthorizationController(ApplicationContext context)
-        //{
-        //    _context = context;
-        //}
+        public AuthorizationController(ApplicationContext context)
+        {
+            _context = context;
+        }
 
         public IActionResult Register()
         {
@@ -27,13 +27,35 @@ namespace WebChatExam.Controllers
         [HttpPost]
         public IActionResult RegisterAction(RegisterModel registerModel)
         {
-            return RedirectToAction("Login", "Authorization");
+            if (ModelState.IsValid)
+            {
+                UserModel user = new UserModel();
+                user.Login = registerModel.Login;
+                user.PasswodHash = CalculateHash(registerModel.Password).ToString();
+                user.PhotoUrl = "~/images/default-user.png";
+                _context.Users.Add(user);
+                _context.SaveChanges();
+                return RedirectToAction("Login", "Authorization");
+            }
+            else
+            {
+                var error = new ErrorViewModel();
+                return View("Error", error);
+            }
         }
 
         [HttpPost]
         public IActionResult LoginAction(LoginModel loginModel)
         {
-            return RedirectToAction("Home", "Chats");
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Home", "Chats");
+            }
+            else
+            {
+                var error = new ErrorViewModel();
+                return View("Error", error);
+            }
         }
 
         private static UInt64 CalculateHash(string read)
