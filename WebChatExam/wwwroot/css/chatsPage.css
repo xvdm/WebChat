@@ -1,0 +1,24 @@
+﻿.split {
+    /*height: 100%;
+    width: 30%;
+    position: fixed;*/
+}
+
+.chats {
+    height: 100%;
+    width: 30%;
+    position: fixed;
+    left: 0;
+    background-color: black;
+    opacity: 0.2;
+}
+
+
+.messages {
+    height: 100%;
+    width: 70%;
+    position: fixed;
+    right: 0;
+    background-color: #555;
+    opacity: 0.2;
+}
