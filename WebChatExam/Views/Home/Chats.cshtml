@@ -3,9 +3,19 @@
 }
 
 <link rel="stylesheet" href="~/css/chatsPage.css" />
+<link rel="stylesheet" href="~/css/chatsList.css" />
 
 <div class="chats">
-
+    @for(int i =0; i < 20; i++)
+    {
+        <div class="chat-container darker">
+            <img src="~/images/default-chat.png" alt="Avatar">
+            <p><strong>Chat name</strong></p>
+            <p>Last message</p>
+            <span class="time-left">11:00</span>
+            <span class="dot">11</span>
+        </div>
+    }
 </div>
 
 <siv class="messages">
