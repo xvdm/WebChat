@@ -44,5 +44,17 @@ namespace WebChatExam.Controllers
         {
             return View("Settings");
         }
+
+        [HttpPost]
+        public IActionResult SendMessage()
+        {
+            return View("Settings");
+        }
+
+        [HttpPost]
+        public IActionResult OpenChat()
+        {
+            return View("Settings");
+        }
     }
 }
