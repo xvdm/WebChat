@@ -66,6 +66,7 @@ form.inputLine::after {
     max-height: 118px;
     opacity: 0.1;
     left: 0;
+    border:none;
 }
 .chatSubmit:hover {
     background-color:black;

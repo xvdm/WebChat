@@ -56,6 +56,7 @@ namespace WebChatExam.Controllers
                     var error = new ErrorViewModel();
                     return View("Error", error);
                 }
+                CurrentUser.EditUser(user);
                 return RedirectToAction("Chats", "Home");
             }
             else
