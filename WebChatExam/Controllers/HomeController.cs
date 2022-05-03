@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using WebChatExam.Models;
 
 namespace WebChatExam.Controllers
@@ -85,5 +88,19 @@ namespace WebChatExam.Controllers
             }
             return hashedValue;
         }
+
+        //protected void Upload(object sender, EventArgs e)
+        //{
+        //    //Access the File using the Name of HTML INPUT File.
+        //    HttpPostedFileBase postedFile = Request.Files["FileUpload"];
+
+        //    //Check if File is available.
+        //    if (postedFile != null && postedFile.ContentLength > 0)
+        //    {
+        //        //Save the File.
+        //        string filePath = Microsoft.AspNetCore.Server.MapPath("~/images/") + Path.GetFileName(postedFile.FileName);
+        //        postedFile.SaveAs(filePath);
+        //    }
+        //}
     }
 }
