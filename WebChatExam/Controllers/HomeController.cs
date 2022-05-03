@@ -23,17 +23,14 @@ namespace WebChatExam.Controllers
 
         public IActionResult Chats()
         {
-            return View();
-        }
-
-        public IActionResult Authorization()
-        {
-            return View();
+            if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
+            else return View();
         }
 
         public IActionResult Settings()
         {
-            return View();
+            if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
+            else return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
