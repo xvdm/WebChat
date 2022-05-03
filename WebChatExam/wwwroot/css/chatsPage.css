@@ -7,22 +7,31 @@
 
 /* список чатов */
 .chats {
+    display: inline-block;
     height: 94%;
     width: 30%;
     left: 0;
     position: fixed;
-    overflow-y:scroll;
-    cursor:pointer;
+    overflow-y: scroll;
+    cursor: pointer;
 }
 .messages {
-    height:90%;
+    display: inline-block;
+    height: 90%;
     width: 44%;
-    right: 25%;
+    left: 30%;
     position: fixed;
     overflow-y: scroll;
 }
-
-
+.chatSettings {
+    display: inline-block;
+    height: 90%;
+    width: 26%;
+    float: right;
+}
+.chatsPage{
+    width:100%;
+}
 /*
     ----------------------------
     поиск

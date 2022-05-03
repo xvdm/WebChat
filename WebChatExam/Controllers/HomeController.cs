@@ -46,6 +46,18 @@ namespace WebChatExam.Controllers
         }
 
         [HttpPost]
+        public IActionResult AddUserToChat()
+        {
+            return View("Settings");
+        }
+
+        [HttpPost]
+        public IActionResult CreateChat()
+        {
+            return View("Settings");
+        }
+
+        [HttpPost]
         public IActionResult SendMessage()
         {
             return View("Settings");
