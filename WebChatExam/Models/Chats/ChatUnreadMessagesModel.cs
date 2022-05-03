@@ -1,4 +1,4 @@
-﻿namespace WebChatExam.Models.Chats
+﻿namespace WebChatExam.Models
 {
     public class ChatUnreadMessagesModel
     {
