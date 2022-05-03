@@ -9,6 +9,10 @@
 
 <div class="chats">
     <form method="post" class="inputLine" asp-controller="Home" asp-action="ChatsSearch">
+        <input type="text" placeholder="Enter a name for a new chat" name="search">
+        <button type="submit">Create chat</button>
+    </form>
+    <form method="post" class="inputLine" asp-controller="Home" asp-action="ChatsSearch">
         <input type="text" placeholder="Search.." name="search">
         <button type="submit">Search</button>
     </form>

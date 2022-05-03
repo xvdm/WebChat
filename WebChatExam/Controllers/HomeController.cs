@@ -62,6 +62,12 @@ namespace WebChatExam.Controllers
         {
             if (ModelState.IsValid)
             {
+                // логин - уникальный
+                if (_context.Users.Where(x => x.Login == model.Login).Any())
+                {
+                    var error = new ErrorViewModel();
+                    return View("Error", error);
+                }
                 UserModel user = new UserModel();
                 user.Login = model.Login;
                 user.PasswodHash = CalculateHash(model.Password).ToString();
