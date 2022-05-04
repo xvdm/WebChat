@@ -16,11 +16,11 @@
 <div class="chatsPage">
     <div class="chats" id="chats">
         <form method="post" class="inputLine" asp-controller="Home" asp-action="CreateChat">
-            <input type="text" placeholder="Enter a name for a new chat" name="name">
+            <input type="text" placeholder="Enter a name for a new chat" name="name" autocomplete="off">
             <button type="submit">Create chat</button>
         </form>
         <form method="post" class="inputLine" asp-controller="Home" asp-action="ChatsSearch">
-            <input type="text" placeholder="Search.." name="search">
+            <input type="text" placeholder="Search.." name="search" autocomplete="off">
             <button type="submit">Search</button>
         </form>
             @foreach(var chat in Repository.Chats)
@@ -67,7 +67,7 @@
             }
         </div>
         <form method="post" class="inputLine" asp-controller="Home" asp-action="SendMessage" style="position: fixed; bottom: 0; width:44%; height:5%;">
-            <input type="text" placeholder="Enter your message" name="text">
+            <input type="text" placeholder="Enter your message" name="text" autocomplete="off">
             <button type="submit">Send</button>
         </form>
     </div>
@@ -75,7 +75,7 @@
 
     <div class="chatSettings" id="settings">
         <form method="post" class="inputLine" asp-controller="Home" asp-action="AddUserToChat">
-            <input type="text" placeholder="Enter username" name="login">
+            <input type="text" placeholder="Enter username" name="login" autocomplete="off">
             <button type="submit">Add</button>
         </form>
     </div>

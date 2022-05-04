@@ -9,13 +9,9 @@ namespace WebChatExam.Models
         public DbSet<ChatModel> Chats { get; set; }
         public DbSet<MessageModel> Messages { get; set; }
 
-        //public DbSet<MessageModel> Messages { get; set; }
-        //public DbSet<ChatMessagesModel> MessagesInChat { get; set; }
-        //public DbSet<ChatUnreadMessagesModel> UnreadMessages { get; set; }
-        //public DbSet<ChatUsersModel> UsersInChat { get; set; }
-
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
     }
