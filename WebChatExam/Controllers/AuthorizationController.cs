@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using WebChatExam.Models;
+using WebChatExam.Models.Chats;
 
 namespace WebChatExam.Controllers
 {

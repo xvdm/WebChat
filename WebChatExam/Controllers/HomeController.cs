@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using WebChatExam.Models;
+using WebChatExam.Models.Chats;
 
 namespace WebChatExam.Controllers
 {
@@ -52,9 +53,14 @@ namespace WebChatExam.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateChat()
+        public IActionResult CreateChat(string name)
         {
-            return View("Settings");
+            ChatModel model = new ChatModel();
+            model.Name = name;
+            model.PhotoUrl = "~/images/default-chat.png";
+            _context.Chats.Add(model);
+            _context.SaveChanges();
+            return View();
         }
 
         [HttpPost]

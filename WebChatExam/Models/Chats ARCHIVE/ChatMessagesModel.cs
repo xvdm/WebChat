@@ -1,4 +1,4 @@
-﻿namespace WebChatExam.Models
+﻿namespace WebChatExam.Models.ARCHIVE
 {
     public class ChatMessagesModel
     {

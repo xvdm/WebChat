@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="~/css/messages.css" />
 
 <div class="chatsPage">
-    <div class="chats">
+    <div class="chats" id="chats">
         <form method="post" class="inputLine" asp-controller="Home" asp-action="CreateChat">
             <input type="text" placeholder="Enter a name for a new chat" name="search">
             <button type="submit">Create chat</button>
@@ -17,7 +17,7 @@
             <button type="submit">Search</button>
         </form>
         <form method="post" asp-controller="Home" asp-action="OpenChat">
-            @for(int i =0; i < 10; i++)
+            @*@for(int i =0; i < 10; i++)
             {
                 <div class="chat-container darker">
                     <input type="submit" class="chatSubmit" value=""/>
@@ -27,12 +27,13 @@
                     <span class="time-left">11:00</span>
                     <span class="dot">11</span>
                 </div>
-            }
+            }*@
+            
         </form>
     </div>
     
     
-    <div class="messages">
+    <div class="messages" id="messages">
         <div>
             <div class="message-container">
                 <img src="~/images/default-user.png" alt="Avatar">
@@ -40,7 +41,7 @@
                 <span class="message-time-right">11:00</span>
             </div>
     
-            @for(int i =0; i < 5; i++)
+            @for(int i = 0; i < 5; i++)
             {
                 <div class="message-container message-darker">
                     <img src="~/images/default-user.png" alt="Avatar" class="right">
@@ -56,7 +57,7 @@
     </div>
     
 
-    <div class="chatSettings">
+    <div class="chatSettings" id="settings">
         <form method="post" class="inputLine" asp-controller="Home" asp-action="AddUserToChat">
             <input type="text" placeholder="Enter username" name="search">
             <button type="submit">Add</button>
