@@ -7,6 +7,7 @@ namespace WebChatExam.Models
     {
         public DbSet<UserModel> Users { get; set; }
         public DbSet<ChatModel> Chats { get; set; }
+        public DbSet<MessageModel> Messages { get; set; }
 
         //public DbSet<MessageModel> Messages { get; set; }
         //public DbSet<ChatMessagesModel> MessagesInChat { get; set; }

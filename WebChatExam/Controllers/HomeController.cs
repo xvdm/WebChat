@@ -26,8 +26,7 @@ namespace WebChatExam.Controllers
 
         public IActionResult Chats()
         {
-            var user = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
-            var chats = _context.Users.Include(c => c.Chats).Where(x => x.Id == user.Id).FirstOrDefault().Chats;
+            var chats = _context.Users.Include(c => c.Chats).Where(x => x.Id == CurrentUser.Id).FirstOrDefault().Chats;
             Repository.Chats = chats;
 
             if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
@@ -95,9 +94,10 @@ namespace WebChatExam.Controllers
             message.Text = text;
             message.Time = DateTime.Now;
             message.Sender = _context.Users.FirstOrDefault(x=> x.Id == CurrentUser.Id);
-            
-            _context.Chats.Include(c => c.Messages).Where(x => x.Id == Repository.CurrentChatId).FirstOrDefault().Messages.Add(message);
-            //messages.Add(message);
+            message.Chat = _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId);
+
+            _context.Messages.Add(message);
+
             _context.SaveChanges();
 
             return RedirectToAction($"Chats");
@@ -106,12 +106,10 @@ namespace WebChatExam.Controllers
         [HttpPost]
         public IActionResult OpenChat(ChatModel chat)
         {
-            var _chat = _context.Chats.FirstOrDefault(x => x.Id == chat.Id);
-            var messages = _context.Chats.Include(c => c.Messages).Where(x => x.Id == chat.Id).FirstOrDefault().Messages;
-            Repository.Messages = messages;
+            var messages = _context.Messages.Where(x => x.Chat.Id == chat.Id).Include(m => m.Chat).Include(s => s.Sender).ToList();
             Repository.CurrentChatId = chat.Id;
+            Repository.Messages = messages;
 
-            //return RedirectToAction($"Chats/{chat.Id}");
             return RedirectToAction($"Chats");
         }
 
