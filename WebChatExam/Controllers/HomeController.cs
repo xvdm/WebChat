@@ -97,6 +97,9 @@ namespace WebChatExam.Controllers
         [HttpPost]
         public IActionResult OpenChat(int chatId)
         {
+            var chat = _context.Chats.FirstOrDefault(x => x.Id == chatId);
+            var messages = _context.Chats.Include(c => c.Messages).Where(x => x.Id == chat.Id).FirstOrDefault().Messages;
+            Repository.Messages = messages;
 
             return RedirectToAction("Chats");
         }
