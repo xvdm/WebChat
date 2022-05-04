@@ -53,9 +53,22 @@ namespace WebChatExam.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddUserToChat()
+        public IActionResult AddUserToChat(string login)
         {
-            return View("Settings");
+            var user = _context.Users.FirstOrDefault(x => x.Login == login);
+            if (user is not null)
+            {
+                var chat = _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId);
+                user.Chats.Add(chat);
+                chat.Users.Add(user);
+                _context.SaveChanges();
+            }
+            else
+            {
+                var error = new ErrorViewModel();
+                return View("Error", error);
+            }
+            return RedirectToAction("Chats");
         }
 
         [HttpPost]
@@ -82,9 +95,10 @@ namespace WebChatExam.Controllers
         }
 
         [HttpPost]
-        public IActionResult OpenChat()
+        public IActionResult OpenChat(int chatId)
         {
-            return View("Settings");
+
+            return RedirectToAction("Chats");
         }
 
         [HttpPost]

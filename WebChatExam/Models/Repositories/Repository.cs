@@ -10,6 +10,7 @@ namespace WebChatExam.Models.Repositories
 
         public static List<ChatModel> Chats { get; set; } = new List<ChatModel>();
         public static List<MessageModel> Messages { get; set; } = new List<MessageModel>();
+        public static int CurrentChatId { get; set; }
         
 
         public static IEnumerable<ChatModel> GetChatsForUser(int userId)
