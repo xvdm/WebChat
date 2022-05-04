@@ -29,8 +29,8 @@ namespace WebChatExam.Controllers
             var chats = _context.Users.Include(c => c.Chats).Where(x => x.Id == CurrentUser.Id).FirstOrDefault().Chats;
             Repository.Chats = chats;
 
-            if(chats != null)
-                OpenChat(chats.First());
+            if(chats.Count > 0)
+                OpenChat(chats.FirstOrDefault());
 
             if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
             else return View();
@@ -50,7 +50,8 @@ namespace WebChatExam.Controllers
 
         public IActionResult Logout()
         {
-            CurrentUser.EditUser(null);
+            CurrentUser.EraseData();
+            Repository.EraseData();
             return RedirectToAction("Login", "Authorization");
         }
 
@@ -109,7 +110,7 @@ namespace WebChatExam.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction($"Chats");
+            return RedirectToAction("Chats");
         }
 
         [HttpPost]
@@ -119,7 +120,7 @@ namespace WebChatExam.Controllers
             Repository.CurrentChatId = chat.Id;
             Repository.Messages = messages;
 
-            return RedirectToAction($"Chats");
+            return RedirectToAction("Chats");
         }
 
         [HttpPost]

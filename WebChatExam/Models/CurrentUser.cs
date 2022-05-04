@@ -18,6 +18,14 @@
             }
         }
 
+        public static void EraseData()
+        {
+            _id = 0;
+            _login = null;
+            _passwordHash = null;
+            _photoUrl=null;
+        }
+
         public static int Id { get { return _id; } }
         public static string Login { get { return _login; } }
         public static string PasswordHash { get { return _passwordHash; } }
