@@ -9,6 +9,5 @@ namespace WebChatExam.Models.Chats
         public string PhotoUrl { get; set; } = "~/images/default-chat.png";
         public List<MessageModel> Messages { get; set; } = new List<MessageModel>();
         public List<UserModel> Users { get; set; } = new List<UserModel>();
-        public List<UnreadMessagesModel> UnreadMessages { get; set; } = new List<UnreadMessagesModel>();
     }
 }
