@@ -1,4 +1,5 @@
-﻿@{
+﻿@using WebChatExam.Models.Repositories
+@{
     ViewData["Title"] = "Chats";
 }
 
@@ -9,7 +10,7 @@
 <div class="chatsPage">
     <div class="chats" id="chats">
         <form method="post" class="inputLine" asp-controller="Home" asp-action="CreateChat">
-            <input type="text" placeholder="Enter a name for a new chat" name="search">
+            <input type="text" placeholder="Enter a name for a new chat" name="name">
             <button type="submit">Create chat</button>
         </form>
         <form method="post" class="inputLine" asp-controller="Home" asp-action="ChatsSearch">
@@ -28,7 +29,17 @@
                     <span class="dot">11</span>
                 </div>
             }*@
-            
+            @foreach(var chat in Repository.Chats)
+            {
+                <div class="chat-container darker">
+                    <input type="submit" class="chatSubmit" value=""/>
+                    <img src=@Url.Content(chat.PhotoUrl) alt="Avatar">
+                    <p><strong>@chat.Name</strong></p>
+                    <p>Last message</p>
+                    <span class="time-left">11:00</span>
+                    <span class="dot">11</span>
+                </div>
+            }
         </form>
     </div>
     

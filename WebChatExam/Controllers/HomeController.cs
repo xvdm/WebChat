@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using WebChatExam.Models;
 using WebChatExam.Models.Chats;
+using Microsoft.EntityFrameworkCore;
+using WebChatExam.Models.Repositories;
 
 namespace WebChatExam.Controllers
 {
@@ -24,6 +26,13 @@ namespace WebChatExam.Controllers
 
         public IActionResult Chats()
         {
+            //int userId = CurrentUser.Id;
+            //var chats = _context.Chats.Include(x => x.Users).ToList();
+            //_context.Users.Where(x => x.Id == userId).ToList();
+
+            var chats = _context.Chats.Include(x => x.Users.Where(u => u.Id == CurrentUser.Id)).ToList();
+            //ViewBag.Chats = chats;
+            Repository.Chats = chats;
             if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
             else return View();
         }
@@ -55,12 +64,22 @@ namespace WebChatExam.Controllers
         [HttpPost]
         public IActionResult CreateChat(string name)
         {
-            ChatModel model = new ChatModel();
-            model.Name = name;
-            model.PhotoUrl = "~/images/default-chat.png";
-            _context.Chats.Add(model);
+            //UserModel user = new UserModel();
+            ////user.Id = CurrentUser.Id;
+            //user.Login = CurrentUser.Login;
+            //user.PhotoUrl = CurrentUser.PhotoUrl;
+            //user.PasswodHash = CurrentUser.PasswordHash;
+
+            ChatModel chat = new ChatModel();
+            chat.Name = name;
+            chat.PhotoUrl = "~/images/default-chat.png";
+
+            //user.Chats.Add(chat);
+            chat.Users.Add(user);
+
+            _context.Chats.Add(chat);
             _context.SaveChanges();
-            return View();
+            return RedirectToAction("Chats");
         }
 
         [HttpPost]

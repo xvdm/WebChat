@@ -1,37 +1,34 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using WebChatExam.Models.Chats;
 
 namespace WebChatExam.Models.Repositories
 {
     public static class Repository
     {
-        private static readonly ApplicationContext _context;
 
-        class ChatComparer : IEqualityComparer<ChatModel>
-        {
-            public bool Equals(ChatModel x, ChatModel y)
-            {
-                if(x.Id == y.Id) return true;
-                else return false;
-            }
-
-            public int GetHashCode([DisallowNull] ChatModel obj)
-            {
-                return obj.GetHashCode();
-            }
-        }
+        public static List<ChatModel> Chats { get; set; } = new List<ChatModel>();
+        public static List<MessageModel> Messages { get; set; } = new List<MessageModel>();
+        
 
         public static IEnumerable<ChatModel> GetChatsForUser(int userId)
         {
             //var chatsForUser = _context.UsersInChat.Where(x => x.UserId == userId).ToList();
             //var result = _context.Chats.Where(x => chatsForUser.Contains(x.Id));
-            var chatsForUser = _context.UsersInChat.Where(x => x.UserId == userId).ToList();
+            //var chatsForUser = _context.UsersInChat.Where(x => x.UserId == userId).ToList();
             //IEnumerable<ChatModel> result = (from cu in chatsForUser
             //                                 join c in _context.Chats on cu.Id
             //                                 equals c
             //                                 select cu);
-            //return result;
+
+            //using (var context = new ApplicationContext())
+            //{
+            //var chats = _context.Chats.Include(x => x.Users.Where(u => u.Id == CurrentUser.Id)).ToList();
+
+            //}
+
+            return null;
         }
     }
 }
