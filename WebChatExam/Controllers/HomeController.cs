@@ -30,7 +30,7 @@ namespace WebChatExam.Controllers
             Repository.Chats = chats;
 
             if(chats.Count > 0)
-                OpenChat(chats.FirstOrDefault());
+                OpenChat(chats.Where(x=> x.Id == Repository.CurrentChatId).FirstOrDefault());
 
             if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
             else return View();
@@ -116,10 +116,13 @@ namespace WebChatExam.Controllers
         [HttpPost]
         public IActionResult OpenChat(ChatModel chat)
         {
-            var messages = _context.Messages.Where(x => x.Chat.Id == chat.Id).Include(m => m.Chat).Include(s => s.Sender).ToList();
-            Repository.CurrentChatId = chat.Id;
-            Repository.Messages = messages;
-
+            if (chat != null)
+            {
+                Repository.Messages.Clear();
+                var messages = _context.Messages.Include(m => m.Chat).Include(s => s.Sender).Where(x => x.Chat.Id == chat.Id).ToList();
+                Repository.CurrentChatId = chat.Id;
+                Repository.Messages = messages;
+            }
             return RedirectToAction("Chats");
         }
 
