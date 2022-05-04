@@ -89,19 +89,30 @@ namespace WebChatExam.Controllers
         }
 
         [HttpPost]
-        public IActionResult SendMessage()
+        public IActionResult SendMessage(string text)
         {
-            return View("Settings");
+            var message = new MessageModel();
+            message.Text = text;
+            message.Time = DateTime.Now;
+            message.Sender = _context.Users.FirstOrDefault(x=> x.Id == CurrentUser.Id);
+            
+            _context.Chats.Include(c => c.Messages).Where(x => x.Id == Repository.CurrentChatId).FirstOrDefault().Messages.Add(message);
+            //messages.Add(message);
+            _context.SaveChanges();
+
+            return RedirectToAction($"Chats");
         }
 
         [HttpPost]
-        public IActionResult OpenChat(int chatId)
+        public IActionResult OpenChat(ChatModel chat)
         {
-            var chat = _context.Chats.FirstOrDefault(x => x.Id == chatId);
+            var _chat = _context.Chats.FirstOrDefault(x => x.Id == chat.Id);
             var messages = _context.Chats.Include(c => c.Messages).Where(x => x.Id == chat.Id).FirstOrDefault().Messages;
             Repository.Messages = messages;
+            Repository.CurrentChatId = chat.Id;
 
-            return RedirectToAction("Chats");
+            //return RedirectToAction($"Chats/{chat.Id}");
+            return RedirectToAction($"Chats");
         }
 
         [HttpPost]

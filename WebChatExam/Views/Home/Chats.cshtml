@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="~/css/messages.css" />
 
 <script>
-    function ShowMessages() {
+    function SetCurrentChatId() {
 
     }
 </script>
@@ -23,19 +23,24 @@
             <input type="text" placeholder="Search.." name="search">
             <button type="submit">Search</button>
         </form>
-        <form method="post" asp-controller="Home" asp-action="OpenChat">
             @foreach(var chat in Repository.Chats)
             {
-                <div class="chat-container darker">
-                    <input type="submit" class="chatSubmit" value="" asp-route-chatId=@chat.Id/>
-                    <img src=@Url.Content(chat.PhotoUrl) alt="Avatar">
-                    <p><strong>@chat.Name</strong></p>
-                    <p>Last message</p>
-                    <span class="time-left">11:00</span>
-                    <span class="dot">11</span>
-                </div>
+                <form method="post" asp-controller="Home" asp-action="OpenChat">
+                    <div class="chat-container darker">
+                        <input type="hidden" value="@chat.Id" name="Id" />
+                        <input type="hidden" value="@chat.Messages" name="Messages" />
+                        <input type="hidden" value="@chat.Name" name="Name" />
+                        <input type="hidden" value="@chat.PhotoUrl" name="PhotoUrl" />
+                        <input type="hidden" value="@chat.Users" name="Users" />
+                        <input type="submit" class="chatSubmit" value=""/>
+                        <img src=@Url.Content(chat.PhotoUrl) alt="Avatar">
+                        <p><strong>@chat.Name</strong></p>
+                        <p>Last message</p>
+                        <span class="time-left">11:00</span>
+                        <span class="dot">11</span>
+                    </div>
+                </form>
             }
-        </form>
     </div>
     
     
@@ -62,7 +67,7 @@
             }
         </div>
         <form method="post" class="inputLine" asp-controller="Home" asp-action="SendMessage" style="position: fixed; bottom: 0; width:44%; height:5%;">
-            <input type="text" placeholder="Enter your message" name="send">
+            <input type="text" placeholder="Enter your message" name="text">
             <button type="submit">Send</button>
         </form>
     </div>
