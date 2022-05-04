@@ -23,21 +23,19 @@
             <input type="text" placeholder="Search.." name="search">
             <button type="submit">Search</button>
         </form>
-        @*<form method="post" asp-controller="Home" asp-action="OpenChat">*@
-            <div>
-                @foreach(var chat in Repository.Chats)
-                {
-                    <div class="chat-container darker">
-                        <input type="submit" class="chatSubmit" value="" asp-route-chatId=@chat.Id/>
-                        <img src=@Url.Content(chat.PhotoUrl) alt="Avatar">
-                        <p><strong>@chat.Name</strong></p>
-                        <p>Last message</p>
-                        <span class="time-left">11:00</span>
-                        <span class="dot">11</span>
-                    </div>
-                }
-            </div>
-        @*</form>*@
+        <form method="post" asp-controller="Home" asp-action="OpenChat">
+            @foreach(var chat in Repository.Chats)
+            {
+                <div class="chat-container darker">
+                    <input type="submit" class="chatSubmit" value="" asp-route-chatId=@chat.Id/>
+                    <img src=@Url.Content(chat.PhotoUrl) alt="Avatar">
+                    <p><strong>@chat.Name</strong></p>
+                    <p>Last message</p>
+                    <span class="time-left">11:00</span>
+                    <span class="dot">11</span>
+                </div>
+            }
+        </form>
     </div>
     
     
