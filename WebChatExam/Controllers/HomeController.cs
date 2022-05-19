@@ -83,18 +83,26 @@ namespace WebChatExam.Controllers
         [HttpPost]
         public IActionResult CreateChat(string name)
         {
-            UserModel user = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
+            if(name != null && name.Length > 0 && name.Trim().Length > 0)
+            {
+                UserModel user = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
 
-            ChatModel chat = new ChatModel();
-            chat.Name = name;
-            chat.PhotoUrl = "~/images/default-chat.png";
+                ChatModel chat = new ChatModel();
+                chat.Name = name;
+                chat.PhotoUrl = "~/images/default-chat.png";
 
-            user.Chats.Add(chat);
-            chat.Users.Add(user);
+                user.Chats.Add(chat);
+                chat.Users.Add(user);
 
-            _context.Chats.Add(chat);
-            _context.SaveChanges();
-            return RedirectToAction("Chats");
+                _context.Chats.Add(chat);
+                _context.SaveChanges();
+                return RedirectToAction("Chats");
+            }
+            else
+            {
+                var error = new ErrorViewModel();
+                return View("Error", error);
+            }
         }
 
         [HttpPost]
