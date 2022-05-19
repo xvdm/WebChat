@@ -16,7 +16,8 @@
     cursor: pointer;
 }
 .messages {
-    display: inline-block;
+    display: flex;
+    flex-direction: column-reverse;
     height: 90%;
     width: 44%;
     left: 30%;
