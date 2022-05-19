@@ -17,3 +17,19 @@
 //    }
 //    document.getElementById("temp").innerHTML = image.src;
 //}
+
+
+var tumbler = document.getElementById("themeCheckbox");
+tumbler.addEventListener("change", function () {
+    var link = document.getElementById("theme-link")
+    let lightTheme = "/css/light.css";
+    let darkTheme = "/css/dark.css";
+    var currentTheme = link.getAttribute("href");
+    if (currentTheme === lightTheme) {
+        currentTheme = darkTheme;
+    }
+    else {
+        currentTheme = lightTheme;
+    }
+    link.setAttribute("href", currentTheme);
+});
