@@ -3,8 +3,6 @@
     width: 0;
 }
 
-
-/* список чатов */
 .chats {
     display: inline-block;
     height: 94%;
@@ -32,11 +30,12 @@
 .chatsPage{
     width:100%;
 }
+
+
 /*
     ----------------------------
     поиск
 */
-/* Style the search field */
 form.inputLine input[type=text] {
     padding: 10px;
     font-size: 17px;
@@ -45,7 +44,6 @@ form.inputLine input[type=text] {
     left: 0;
 }
 
-/* Style the submit button */
 form.inputLine button {
     float: left;
     width: 20%;
@@ -55,7 +53,6 @@ form.inputLine button {
     cursor: pointer;
 }
 
-/* Clear floats */
 form.inputLine::after {
     content: "";
     clear: both;

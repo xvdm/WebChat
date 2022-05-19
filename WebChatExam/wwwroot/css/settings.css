@@ -2,7 +2,6 @@
     box-sizing: border-box
 }
 
-/* Container needed to position the overlay. Adjust the width as needed */
 .photo-container {
     position: relative;
     width: 50%;
@@ -10,7 +9,6 @@
     width: 200px;
 }
 
-/* Make the image to responsive */
 .photo-image {
     display: block;
     width: 100%;
@@ -18,7 +16,6 @@
     border-radius: 50%;
 }
 
-/* The overlay effect - lays on top of the container and over the image */
 .photo-overlay {
     position: absolute;
     top: 0;
@@ -40,7 +37,6 @@
     left:0;
 }
 
-/* When you mouse over the container, fade in the overlay title */
 .photo-container:hover .photo-overlay {
     opacity: 1;
 }
