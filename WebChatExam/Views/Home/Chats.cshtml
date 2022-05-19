@@ -59,6 +59,7 @@
                 else
                 {
                     <div class="message-container">
+                        <h6>@Repository.Chats.Where(x => x.Id == Repository.CurrentChatId).FirstOrDefault()?.Users.Where(y => y.Id == message.Sender.Id).FirstOrDefault()?.Login</h6>
                         <img src=@Url.Content(message.Sender.PhotoUrl) alt="Avatar">
                         <p>@message.Text</p>
                         <span class="message-time-right">@message.Time</span>

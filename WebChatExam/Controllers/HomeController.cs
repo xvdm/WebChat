@@ -127,7 +127,7 @@ namespace WebChatExam.Controllers
             if (chat != null)
             {
                 Repository.Messages.Clear();
-                var messages = _context.Messages.Include(m => m.Chat).Include(s => s.Sender).Where(x => x.Chat.Id == chat.Id).ToList();
+                var messages = _context.Messages.Include(m => m.Chat).Include(x=>x.Chat.Users).Where(x => x.Chat.Id == chat.Id).ToList();
                 Repository.CurrentChatId = chat.Id;
                 Repository.Messages = messages;
             }
