@@ -20,7 +20,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Settings">Settings</a>
                         </li>
-                        <li class="nav-item right">
+                        <li style="position:absolute; right:100px; top:12px;">
+                            <label class="switch">
+                                <input type="checkbox" id="themeCheckbox">
+                                <span class="slider round"/>
+                            </label>
+                        </li>
+                        <li class="nav-item" style="position:absolute; right:15px;">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Logout">Logout</a>
                         </li>
                     </ul>
