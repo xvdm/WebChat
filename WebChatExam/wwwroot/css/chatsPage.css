@@ -4,7 +4,6 @@
 }
 
 
-
 /* список чатов */
 .chats {
     display: inline-block;
@@ -41,10 +40,8 @@
 form.inputLine input[type=text] {
     padding: 10px;
     font-size: 17px;
-    border: 1px solid grey;
     float: left;
     width: 80%;
-    background: #f1f1f1;
     left: 0;
 }
 
@@ -53,10 +50,7 @@ form.inputLine button {
     float: left;
     width: 20%;
     padding: 10px;
-    background: #999;
-    color: white;
     font-size: 17px;
-    border: 1px solid grey;
     border-left: none; /* Prevent double borders */
     cursor: pointer;
 }
@@ -77,7 +71,4 @@ form.inputLine::after {
     opacity: 0.1;
     left: 0;
     border:none;
-}
-.chatSubmit:hover {
-    background-color:black;
 }
