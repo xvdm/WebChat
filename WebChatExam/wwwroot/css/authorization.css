@@ -2,6 +2,10 @@
     padding: 0px;
 }
 
+input {
+    outline: none;
+}
+
 input[type=text], input[type=password] {
     width: 100%;
     padding: 15px;
@@ -11,10 +15,6 @@ input[type=text], input[type=password] {
 
 label {
     margin-top:25px;
-}
-
-input[type=text]:focus, input[type=password]:focus {
-    outline: none;
 }
 
 hr {

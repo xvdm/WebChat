@@ -38,20 +38,8 @@ a {
 /* chats list */
 
 .chat-container {
-    border: 2px solid #dedede;
-}
-
-.darker {
-    border-color: #ccc;
+    border: 1px solid #ccc;
     background-color: #ddd;
-}
-
-.time-right {
-    color: #aaa;
-}
-
-.time-left {
-    color: #999;
 }
 
 .dot {

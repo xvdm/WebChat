@@ -26,7 +26,7 @@
             @foreach(var chat in Repository.Chats)
             {
                 <form method="post" asp-controller="Home" asp-action="OpenChat">
-                    <div class="chat-container darker">
+                    <div class="chat-container">
                         <input type="hidden" value="@chat.Id" name="Id" />
                         <input type="hidden" value="@chat.Messages" name="Messages" />
                         <input type="hidden" value="@chat.Name" name="Name" />

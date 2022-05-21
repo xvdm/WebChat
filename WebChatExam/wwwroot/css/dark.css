@@ -1,11 +1,26 @@
 ﻿/* common */
 
+:root {
+    --text: rgb(200,200,200);
+    --text-hover: rgb(225,225,225);
+    --semi-dark: rgb(75,75,75);
+    --dark: rgb(50,50,50);
+    --darkest: rgb(25,25,25);
+    --black: rgb(0,0,0);
+}
+
+html, .text-center {
+    background-color: var(--dark);
+    color: var(--text);
+}
+
 input[type=text], input[type=password] {
-    background: #f1f1f1;
+    background: var(--darkest);
+    color:var(--text);
 }
 
     input[type=text]:focus, input[type=password]:focus {
-        background-color: #ddd;
+        background: var(--darkest);
     }
 
 hr {
@@ -15,63 +30,46 @@ hr {
 
 
 
-
-
 /* authorization */
 
 .registerbtn {
-    background-color: black;
+    background-color: var(--darkest);
     color: white;
 }
+    .registerbtn:hover {
+        background-color: var(--semi-dark);
+    }
 
-a {
-    color: black;
+.signin a {
+    color: var(--text);
 }
-
-.signin {
-    background-color: #f1f1f1;
+.signin a:hover{
+    color: var(--text-hover);
 }
-
-
 
 
 
 /* chats list */
 
 .chat-container {
-    border: 2px solid #dedede;
-}
-
-.darker {
-    border-color: #ccc;
-    background-color: #ddd;
-}
-
-.time-right {
-    color: #aaa;
-}
-
-.time-left {
-    color: #999;
+    border: 1px solid black;
+    color: var(--text);
 }
 
 .dot {
-    background-color: #9999;
+    background-color: var(--semi-dark);
 }
-
-
-
-
 
 /* chats page */
 
 form.inputLine input[type=text] {
-    background: #f1f1f1;
-    border: 1px solid grey;
+    background: var(--dark);
+    color: var(--text);
+    border: 1px solid black;
 }
 
 form.inputLine button {
-    background: #999;
+    background: var(--semi-dark);
     color: white;
     border: 1px solid grey;
 }
