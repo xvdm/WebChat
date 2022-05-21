@@ -24,10 +24,6 @@ namespace WebChatExam.Controllers
         public IActionResult Login()
         {
             var loginModel = new LoginModel();
-            if(Request.Cookies.ContainsKey("theme"))
-            {
-                Repository.CurrentThemeCss = Request.Cookies["theme"];
-            }
             return View(loginModel);
         }
 
