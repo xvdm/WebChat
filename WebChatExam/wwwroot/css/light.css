@@ -26,9 +26,6 @@ hr {
 a {
     color: black;
 }
-    a:hover {
-        color: black;
-    }
 
 .signin {
     background-color: #f1f1f1;
@@ -42,7 +39,6 @@ a {
 
 .chat-container {
     border: 2px solid #dedede;
-    background-color: #f1f1f1;
 }
 
 .darker {
