@@ -1,5 +1,5 @@
 ﻿* {
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 .photo-container {
@@ -55,7 +55,7 @@
 
 .profile-edit {
     white-space: nowrap;
-    margin-top:20px;
+    margin-top:0px;
 }
 .profile-edit div {
     display: inline-block;
@@ -66,4 +66,12 @@
     position:absolute;
 }
 
+
+#changePhotoBtn {
+    float: left;
+    width: 100%;
+    padding: 5px;
+    font-size: 17px;
+    cursor: pointer;
+}
 
