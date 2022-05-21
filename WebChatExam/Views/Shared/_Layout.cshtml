@@ -10,15 +10,15 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-0">
-            <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-0" id="bodyheader">
+            <div class="container" id="bodyheader">
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Chats">Chats</a>
+                            <a class="nav-link txt-color" asp-controller="Home" asp-action="Chats">Chats</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Settings">Settings</a>
+                            <a class="nav-link txt-color" asp-controller="Home" asp-action="Settings">Settings</a>
                         </li>
                         <li style="position:absolute; right:100px; top:12px;">
                             <label class="switch">
@@ -27,7 +27,7 @@
                             </label>
                         </li>
                         <li class="nav-item" style="position:absolute; right:15px;">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Logout">Logout</a>
+                            <a class="nav-link txt-color" asp-controller="Home" asp-action="Logout">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -35,7 +35,7 @@
         </nav>
     </header>
     <div>
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>

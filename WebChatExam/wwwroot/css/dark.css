@@ -9,6 +9,16 @@
     --black: rgb(0,0,0);
 }
 
+#bodyheader {
+    background-color: var(--dark);
+}
+.txt-color {
+    color:var(--text);
+}
+.txt-color:hover {
+    color: var(--text-hover);
+}
+
 html, .text-center {
     background-color: var(--dark);
     color: var(--text);

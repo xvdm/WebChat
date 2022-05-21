@@ -1,5 +1,18 @@
 ﻿/* common */
 
+:root {
+    --text: rgb(0,0,0);
+    --text-hover: rgb(100,100,100);
+}
+
+.txt-color {
+    color: var(--text);
+}
+
+    .txt-color:hover {
+        color: var(--text-hover);
+    }
+
 input[type=text], input[type=password] {
     background: #f1f1f1;
 }
