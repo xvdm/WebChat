@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using WebChatExam.Models;
 using WebChatExam.Models.Chats;
+using WebChatExam.Models.Repositories;
 
 namespace WebChatExam.Controllers
 {
@@ -23,6 +24,10 @@ namespace WebChatExam.Controllers
         public IActionResult Login()
         {
             var loginModel = new LoginModel();
+            if(Request.Cookies.ContainsKey("theme"))
+            {
+                Repository.CurrentThemeCss = Request.Cookies["theme"];
+            }
             return View(loginModel);
         }
 

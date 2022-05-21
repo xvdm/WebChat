@@ -1,10 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using WebChatExam.Models.Repositories;
+<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="~/css/light.css" id="theme-link">
+    <link rel="stylesheet" href=@Repository.CurrentThemeCss id="theme-link">
 </head>
 <body>
     <div>

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using WebChatExam.Models.Repositories;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -6,7 +8,7 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/light.css" id="theme-link">
+    <link rel="stylesheet" href=@Repository.CurrentThemeCss id="theme-link">
 </head>
 <body>
     <header>
