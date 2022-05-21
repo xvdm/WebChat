@@ -108,17 +108,25 @@ namespace WebChatExam.Controllers
         [HttpPost]
         public IActionResult SendMessage(string text)
         {
-            var message = new MessageModel();
-            message.Text = text;
-            message.Time = DateTime.Now;
-            message.Sender = _context.Users.FirstOrDefault(x=> x.Id == CurrentUser.Id);
-            message.Chat = _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId);
+            if (text != null && text.Length > 0 && text.Trim().Length > 0)
+            {
+                var message = new MessageModel();
+                message.Text = text;
+                message.Time = DateTime.Now;
+                message.Sender = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
+                message.Chat = _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId);
 
-            _context.Messages.Add(message);
+                _context.Messages.Add(message);
 
-            _context.SaveChanges();
+                _context.SaveChanges();
 
-            return RedirectToAction("Chats");
+                return RedirectToAction("Chats");
+            }
+            else
+            {
+                var error = new ErrorViewModel();
+                return View("Error", error);
+            }
         }
 
         [HttpPost]
