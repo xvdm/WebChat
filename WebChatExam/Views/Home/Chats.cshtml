@@ -45,14 +45,22 @@
     
     
     <div class="messages" id="messages">
-        @if(Repository.Messages.Count == 0)
+        @if(Repository.CurrentChatId == -1)
         {
             <div style="position:absolute; top:50%; width:100%; text-align:center">
                 <h3>Select a chat to start messaging.</h3>
             </div>
         }
         else {
-            <div>
+            if(Repository.Messages.Count == 0)
+            {
+                <div style="position:absolute; top:50%; width:100%; text-align:center">
+                    <h3>No messages yet.</h3>
+                </div>
+            }
+            else
+            {
+               <div>
                 @foreach(var message in Repository.Messages)
                 {
                     @if (message.Sender.Id == CurrentUser.Id)
@@ -73,12 +81,13 @@
                         </div>
                     }
                 }
-            </div>
-            <form method="post" class="inputLine" asp-controller="Home" asp-action="SendMessage" style="position: fixed; bottom: 0; width:44%; height:5%;">
+            </div> 
+            }
+        }
+        <form method="post" class="inputLine" asp-controller="Home" asp-action="SendMessage" style="position: fixed; bottom: 0; width:44%; height:5%;">
                 <input type="text" placeholder="Enter your message" name="text" autocomplete="off" autofocus>
                 <button type="submit">Send</button>
-            </form>
-        }
+        </form>
     </div>
     
 
