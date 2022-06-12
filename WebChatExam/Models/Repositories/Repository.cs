@@ -15,7 +15,7 @@ namespace WebChatExam.Models.Repositories
         {
             Chats.Clear();
             Messages.Clear();
-            CurrentChatId = -1;
+            CurrentChatId = -1; 
         }
     }
 }
