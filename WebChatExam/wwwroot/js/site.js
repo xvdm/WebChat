@@ -38,7 +38,6 @@ window.onload = function () {
 
 if (tumbler != null) {
     tumbler.addEventListener("change", function () {
-        alert("hi");
         let lightTheme = "/css/light.css";
         let darkTheme = "/css/dark.css";
         var currentTheme = link.getAttribute("href");
