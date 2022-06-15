@@ -12,17 +12,15 @@ using WebChatExam.Models;
 using WebChatExam.Models.Chats;
 using Microsoft.EntityFrameworkCore;
 using WebChatExam.Models.Repositories;
+using System.Web.WebPages;
 using System.Web.Helpers;
+using System.Web;
 
 namespace WebChatExam.Controllers
 {
     public class HomeController : Controller
     {
         private ApplicationContext _context;
-
-        WebImage photo = null;
-        string imagePath = "";
-        string newFileName = "";
 
         public HomeController(ApplicationContext context)
         {
@@ -148,25 +146,30 @@ namespace WebChatExam.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateUserInfo(string path, LoginModel model)
+        public IActionResult UpdateUserInfo(IFormFile uploadFile, LoginModel model)
         {
+            Console.WriteLine("File: " + uploadFile.FileName);
+            Console.WriteLine("Login: " + model.Login);
+            Console.WriteLine("Password: " + model.Password);
             if (ModelState.IsValid)
             {
-                // логин - уникальный
-                if (model.Login != CurrentUser.Login && _context.Users.Where(x => x.Login == model.Login).Any())
+                if (model.Login != CurrentUser.Login)
                 {
-                    var error = new ErrorViewModel();
-                    return View("Error", error);
+                    // логин - уникальный
+                    if (_context.Users.Where(x => x.Login == model.Login).Any())
+                    {
+                        var error = new ErrorViewModel();
+                        return View("Error", error);
+                    }
+                    UserModel user = new UserModel();
+                    user.Login = model.Login;
+                    user.PasswodHash = CalculateHash(model.Password).ToString();
+                    user.PhotoUrl = CurrentUser.PhotoUrl;
+                    user.Id = CurrentUser.Id;
+                    _context.Users.Update(user);
+                    _context.SaveChanges();
+                    CurrentUser.EditUser(user);
                 }
-                UserModel user = new UserModel();
-                user.Login = model.Login;
-                user.PasswodHash = CalculateHash(model.Password).ToString();
-                user.PhotoUrl = CurrentUser.PhotoUrl;
-                user.Id= CurrentUser.Id;
-                _context.Users.Update(user);
-                _context.SaveChanges();
-                CurrentUser.EditUser(user);
-                return View("Settings");
             }
             return View("Settings");
         }
