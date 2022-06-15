@@ -148,12 +148,12 @@ namespace WebChatExam.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateUserLoginPassword(LoginModel model)
+        public IActionResult UpdateUserInfo(string path, LoginModel model)
         {
             if (ModelState.IsValid)
             {
                 // логин - уникальный
-                if (_context.Users.Where(x => x.Login == model.Login).Any())
+                if (model.Login != CurrentUser.Login && _context.Users.Where(x => x.Login == model.Login).Any())
                 {
                     var error = new ErrorViewModel();
                     return View("Error", error);
@@ -180,11 +180,6 @@ namespace WebChatExam.Controllers
                 hashedValue *= 3074457345618258799ul;
             }
             return hashedValue;
-        }
-
-        public void UploadPhoto()
-        {
-
         }
     }
 }

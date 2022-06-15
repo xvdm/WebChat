@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="~/css/settings.css" />
 
 <div class="profile-edit">
-    <div class="photo-container">
+    @*<div class="photo-container">
         <form method="post" asp-antiforgery="true" asp-controller="Home" asp-action="UploadPhoto" enctype="multipart/form-data">
             <img src="~/images/default-user.png" alt="Avatar" class="photo-image">
             <div class="photo-overlay">
@@ -16,23 +16,32 @@
             </div>
             <input type="submit" value="Submit" />
         </form>
-    </div> 
+    </div> *@
     
-    <br />
+    @*<br />*@
 
-    <form method="post" asp-antiforgery="true" asp-controller="Home" asp-action="UpdateUserLoginPassword">
-        <div class="container forms">
-            <p id="temp">Edit login & password</p>
-            <hr>
+    <form method="post" asp-antiforgery="true" asp-controller="Home" asp-action="UpdateUserInfo">
+        <br />
+        <div class="photo-container">
+            <img src="~/images/default-user.png" alt="Avatar" class="photo-image">
+            <div class="photo-overlay">
+                <input type="file" name="Image" class="changePhotoSubmit"/>
+                <p class="photo-text">Change photo</p>
+            </div>
+        </div> 
+
+        <hr>
+
+        <div class="LoginPassword">
             <div>
                 <label asp-for="Login"><b></b></label>
-                <input type="text" placeholder="Enter new Login" asp-for="Login">
+                <input type="text" placeholder="Enter new Login" asp-for="Login" class="loginInput">
                 <span asp-validation-for="Login"/>
             </div>
             <br />
             <div>
                 <label asp-for="Password"><b></b></label>
-                <input type="password" placeholder="Enter new Password" asp-for="Password" autocomplete="off">
+                <input type="password" placeholder="Enter new Password" asp-for="Password" autocomplete="off" class="loginInput">
                 <span asp-validation-for="Password"/>
             </div>
             <hr>

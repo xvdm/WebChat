@@ -56,17 +56,8 @@
     white-space: nowrap;
     margin-top: 0px;
     display: flex;
-    align-content:center;
     justify-content: center;
 }
-.profile-edit div {
-    display: inline-block;
-
-}
-.profile-edit form {
-    display: inline-block;
-}
-
 
 #changePhotoBtn {
     float: left;
@@ -76,3 +67,6 @@
     cursor: pointer;
 }
 
+.loginInput {
+    text-align:center;
+}
