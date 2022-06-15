@@ -1,23 +1,25 @@
 ﻿@model LoginModel
-@using System.Web.Helpers
+@using Microsoft.AspNetCore.Http
 @{
     ViewData["Title"] = "Settings";
-    string imageUrl = "";
 }
 
 <link rel="stylesheet" href="~/css/settings.css" />
 
 <div class="profile-edit">
-    <div class="photo-container">  
-        <img src="~/images/default-user.png" alt="Avatar" class="photo-image">
-        <div class="photo-overlay"><p class="photo-text">Change photo</p></div>
-        <form id="form1" runat="server" enctype="multipart/form-data">
-            <input type="file" accept="image/*" name="FileUpload"/>
-            <br />
-            <button id="Button1" text="Upload" runat="server" onclick="Upload">Upload</button>
+    <div class="photo-container">
+        <form method="post" asp-antiforgery="true" asp-controller="Home" asp-action="UploadPhoto" enctype="multipart/form-data">
+            <img src="~/images/default-user.png" alt="Avatar" class="photo-image">
+            <div class="photo-overlay">
+                <input type="file" name="Image" class="changePhotoSubmit"/>
+                <p class="photo-text">Change photo</p>
+            </div>
+            <input type="submit" value="Submit" />
         </form>
     </div>
     
+    <br />
+
     <form method="post" asp-antiforgery="true" asp-controller="Home" asp-action="UpdateUserLoginPassword">
         <div class="container forms">
             <p id="temp">Edit login & password</p>

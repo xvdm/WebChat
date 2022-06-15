@@ -12,12 +12,17 @@ using WebChatExam.Models;
 using WebChatExam.Models.Chats;
 using Microsoft.EntityFrameworkCore;
 using WebChatExam.Models.Repositories;
+using System.Web.Helpers;
 
 namespace WebChatExam.Controllers
 {
     public class HomeController : Controller
     {
         private ApplicationContext _context;
+
+        WebImage photo = null;
+        string imagePath = "";
+        string newFileName = "";
 
         public HomeController(ApplicationContext context)
         {
@@ -177,18 +182,9 @@ namespace WebChatExam.Controllers
             return hashedValue;
         }
 
-        //protected void Upload(object sender, EventArgs e)
-        //{
-        //    //Access the File using the Name of HTML INPUT File.
-        //    HttpPostedFileBase postedFile = Request.Files["FileUpload"];
+        public void UploadPhoto()
+        {
 
-        //    //Check if File is available.
-        //    if (postedFile != null && postedFile.ContentLength > 0)
-        //    {
-        //        //Save the File.
-        //        string filePath = Microsoft.AspNetCore.Server.MapPath("~/images/") + Path.GetFileName(postedFile.FileName);
-        //        postedFile.SaveAs(filePath);
-        //    }
-        //}
+        }
     }
 }
