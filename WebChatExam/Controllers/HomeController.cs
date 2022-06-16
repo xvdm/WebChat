@@ -185,13 +185,18 @@ namespace WebChatExam.Controllers
         }
 
         [HttpGet]
-        public IActionResult LeaveChat()
+        public IActionResult LeaveChat(string captcha)
         {
-            if(Repository.CurrentChatId >= 0)
+            if(Repository.CurrentChatId >= 0 && captcha == "LEAVE")
             {
                 ChatModel chat = _context.Chats.Where(x=> x.Id == Repository.CurrentChatId).FirstOrDefault();
                 _context.Chats.Remove(chat);
                 _context.SaveChanges();
+            }
+            else
+            {
+                var error = new ErrorViewModel();
+                return View("Error", error);
             }
             return RedirectToAction("Chats");
         }
