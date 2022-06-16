@@ -3,21 +3,6 @@
 
 // Write your JavaScript code.
 
-//const input = document.querySelector('input');
-//input.addEventListener('change', updateImageDisplay());
-//alert("sd");
-//input.style.opacity = 0;
-
-//function updateImageDisplay() {
-//    alert("success1");
-//    const file = input.files[0];
-//    if (validFileType(file)) {
-//        image.src = URL.createObjectURL(file);
-//        alert("success2");
-//    }
-//    document.getElementById("temp").innerHTML = image.src;
-//}
-
 var tumbler = document.getElementById("themeCheckbox");
 var link = document.getElementById("theme-link")
 
