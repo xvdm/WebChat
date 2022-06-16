@@ -10,7 +10,7 @@
     <form method="post" asp-antiforgery="true" asp-controller="Home" asp-action="UpdateUserInfo" enctype="multipart/form-data">
         <br />
         <div class="photo-container">
-            <img src="~/images/default-user.png" alt="Avatar" class="photo-image">
+            <img src=@CurrentUser.PhotoUrl alt="Avatar" class="photo-image">
             <div class="photo-overlay">
                 <input type="file" accept="image/*" name="uploadFile" class="changePhotoSubmit"/>
                 <p class="photo-text">Change photo</p>
