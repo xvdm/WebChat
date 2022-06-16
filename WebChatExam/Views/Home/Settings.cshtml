@@ -9,6 +9,7 @@
 <script>
     function changePhoto() {
         alert("changed");
+        document.getElementById("currentImage").src = URL.createObjectURL(document.getElementById("photoInput").files[0]);
     }
 </script>
 
@@ -16,9 +17,9 @@
     <form method="post" asp-antiforgery="true" asp-controller="Home" asp-action="UpdateUserInfo" enctype="multipart/form-data">
         <br />
         <div class="photo-container">
-            <img src=@CurrentUser.PhotoUrl alt="Avatar" class="photo-image">
+            <img src=@CurrentUser.PhotoUrl alt="Avatar" class="photo-image" id="currentImage">
             <div class="photo-overlay">
-                <input type="file" accept="image/*" name="uploadFile" class="changePhotoSubmit" onchange="changePhoto()"/>
+                <input type="file" accept="image/*" name="uploadFile" class="changePhotoSubmit" onchange="changePhoto()" id="photoInput"/>
                 <p class="photo-text">Change photo</p>
             </div>
         </div> 
