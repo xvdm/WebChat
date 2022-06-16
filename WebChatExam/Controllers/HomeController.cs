@@ -160,6 +160,8 @@ namespace WebChatExam.Controllers
                         uploadFile.CopyToAsync(fileStream);
                     }
                     CurrentUser.UpdatePhoto(path);
+                    _context.Users.Where(x => x.Id == CurrentUser.Id).FirstOrDefault().PhotoUrl = path;
+                    _context.SaveChanges();
                 } 
                 if (model.Login != CurrentUser.Login)
                 {

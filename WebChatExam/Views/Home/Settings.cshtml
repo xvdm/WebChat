@@ -6,13 +6,19 @@
 
 <link rel="stylesheet" href="~/css/settings.css" />
 
+<script>
+    function changePhoto() {
+        alert("changed");
+    }
+</script>
+
 <div class="profile-edit">
     <form method="post" asp-antiforgery="true" asp-controller="Home" asp-action="UpdateUserInfo" enctype="multipart/form-data">
         <br />
         <div class="photo-container">
             <img src=@CurrentUser.PhotoUrl alt="Avatar" class="photo-image">
             <div class="photo-overlay">
-                <input type="file" accept="image/*" name="uploadFile" class="changePhotoSubmit"/>
+                <input type="file" accept="image/*" name="uploadFile" class="changePhotoSubmit" onchange="changePhoto()"/>
                 <p class="photo-text">Change photo</p>
             </div>
         </div> 
@@ -42,10 +48,3 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
-
-
-@*<form id="form1" runat="server" enctype="multipart/form-data">
-        <input type="file" accept="image/*" name="FileUpload"/>
-        <br />
-        <button id="Button1" text="Upload" runat="server" onclick="Upload" >Upload</button>
-</form>*@
