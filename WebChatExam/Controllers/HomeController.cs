@@ -184,6 +184,18 @@ namespace WebChatExam.Controllers
             return View("Settings");
         }
 
+        [HttpGet]
+        public IActionResult LeaveChat()
+        {
+            if(Repository.CurrentChatId >= 0)
+            {
+                ChatModel chat = _context.Chats.Where(x=> x.Id == Repository.CurrentChatId).FirstOrDefault();
+                _context.Chats.Remove(chat);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Chats");
+        }
+
         private static UInt64 CalculateHash(string read)
         {
             UInt64 hashedValue = 3074457345618258791ul;
@@ -196,3 +208,4 @@ namespace WebChatExam.Controllers
         }
     }
 }
+
