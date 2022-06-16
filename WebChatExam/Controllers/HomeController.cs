@@ -21,10 +21,12 @@ namespace WebChatExam.Controllers
     public class HomeController : Controller
     {
         private ApplicationContext _context;
+        IWebHostEnvironment _appEnvironment;
 
-        public HomeController(ApplicationContext context)
+        public HomeController(ApplicationContext context, IWebHostEnvironment appEnvironment)
         {
             _context = context;
+            _appEnvironment = appEnvironment;
         }
 
         public IActionResult Chats()
@@ -148,11 +150,17 @@ namespace WebChatExam.Controllers
         [HttpPost]
         public IActionResult UpdateUserInfo(IFormFile uploadFile, LoginModel model)
         {
-            Console.WriteLine("File: " + uploadFile.FileName);
-            Console.WriteLine("Login: " + model.Login);
-            Console.WriteLine("Password: " + model.Password);
             if (ModelState.IsValid)
             {
+                if(uploadFile != null)
+                {
+                    string path = "/images/" + uploadFile.FileName;
+                    using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                    {
+                        uploadFile.CopyToAsync(fileStream);
+                    }
+                    CurrentUser.UpdatePhoto(path);
+                } 
                 if (model.Login != CurrentUser.Login)
                 {
                     // логин - уникальный

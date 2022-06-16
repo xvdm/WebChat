@@ -18,6 +18,11 @@
             }
         }
 
+        public static void UpdatePhoto(string photoPath)
+        {
+            if(photoPath != null) _photoUrl = photoPath;
+        }
+
         public static void EraseData()
         {
             _id = 0;
