@@ -192,6 +192,7 @@ namespace WebChatExam.Controllers
                 ChatModel chat = _context.Chats.Where(x=> x.Id == Repository.CurrentChatId).FirstOrDefault();
                 _context.Chats.Remove(chat);
                 _context.SaveChanges();
+                Repository.CurrentChatId = -1;
             }
             else
             {
