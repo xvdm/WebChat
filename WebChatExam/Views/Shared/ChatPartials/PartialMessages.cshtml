@@ -1,6 +1,26 @@
 ﻿@using WebChatExam.Models.Repositories
 @{
 }
+                            
+<script type="text/javascript">
+    function sendMessage() {
+        var message = $("#messageInput").serialize();
+        alert(message);
+
+        $.ajax({
+            type: 'POST',
+            url: '/Home/SendMessage',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
+            data: message,
+            success: function (result) {
+                alert('Successfully received message ');
+            },
+            error: function () {
+                alert('Failed to receive the message');
+            }
+        })
+    }
+</script>
 
 <div class="messages" id="messages">
     @if(Repository.CurrentChatId == -1)
@@ -42,31 +62,12 @@
         </div> 
         }
     }
-    <form method="post" class="inputLine" asp-controller="Home" asp-action="SendMessage" style="position: fixed; bottom: 0; width:44%; height:5%;">
+    @*<form method="post" class="inputLine" asp-controller="Home" asp-action="SendMessage" style="position: fixed; bottom: 0; width:44%; height:5%;">
             <input type="text" placeholder="Enter your message" name="text" autocomplete="off" id="messageInput" autofocus>
             <button type="submit" onclick="sendMessage()">Send</button>
+    </form>*@
+    <form class="inputLine" style="position: fixed; bottom: 0; width:44%; height:5%;">
+            <input type="text" placeholder="Enter your message" name="text" autocomplete="off" id="messageInput" autofocus>
+            <button type="button" onclick="sendMessage()">Send</button>
     </form>
 </div>
-
-
-
-                            
-<script type="text/javascript">
-    function sendMessage() {
-        var message = $("#messageInput").serialize();
-        alert(message);
-
-        $.ajax({
-            type: 'POST',
-            url: '/Home/SendMessage',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
-            data: message,
-            success: function (result) {
-                alert('Successfully received message ');
-            },
-            error: function () {
-                alert('Failed to receive the message');
-            }
-        })
-    }
-</script>
