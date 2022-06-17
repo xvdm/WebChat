@@ -9,19 +9,38 @@
 <link rel="stylesheet" href="~/css/messages.css" />
 
 <script type="text/javascript">
+    document.addEventListener('keydown', function(event) {
+        if (event.code == 'Enter') {
+            document.getElementById("sendMessageButton").focus();
+        }   
+    });
+
     function sendMessage() {
         var message = $("#messageInput").serialize();
         $.ajax({
             type: 'POST',
             url: '/Home/SendMessage',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: message,
             success: function (result) {
+                $("#messages").html(result);
+                document.getElementById("messageInput").focus();
+            }
+        })
+    }
+
+    function openChat() {
+        var chatId = 1;
+        $.ajax({
+            type: 'POST',
+            url: '/Home/OpenChat',
+            data: chatId,
+            success: function(result) {
                 $("#messages").html(result);
             }
         })
     }
 </script>
+
 
 <div class="chatsPage">
     <div class="chats" id="chats">
