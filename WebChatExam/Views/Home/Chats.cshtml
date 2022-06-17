@@ -8,6 +8,27 @@
 <link rel="stylesheet" href="~/css/chatsList.css" />
 <link rel="stylesheet" href="~/css/messages.css" />
 
+<script type="text/javascript">
+    function sendMessage() {
+        var message = $("#messageInput").serialize();
+        //alert(message);
+        $.ajax({
+            type: 'POST',
+            url: '/Home/SendMessage',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: message,
+            success: function (result) {
+                //alert('Successfully received message');
+                alert(result);
+                //location.reload();
+            }//,
+            //error: function () {
+            //    alert('Failed to receive the message');
+            //}
+        })
+    }
+</script>
+
 <div class="chatsPage">
     @await Html.PartialAsync("ChatPartials/PartialChatsList")
     
