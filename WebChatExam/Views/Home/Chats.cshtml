@@ -22,7 +22,7 @@
         <form method="post" class="inputLine" asp-controller="Home" asp-action="ChatsSearch">
             <input type="text" placeholder="Search.." name="search" autocomplete="off">
             <button type="submit">Search</button>
-        </form>
+        </form> 
             @foreach(var chat in Repository.Chats)
             {
                 <form method="post" asp-controller="Home" asp-action="OpenChat">
