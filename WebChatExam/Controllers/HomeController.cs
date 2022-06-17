@@ -143,12 +143,10 @@ namespace WebChatExam.Controllers
                 message.Chat = _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId);
 
                 _context.Messages.Add(message);
-
                 _context.SaveChanges();
+                Repository.Messages.Add(message);
 
-                //Console.WriteLine("rabotaet");
-                //return RedirectToAction("Chats");
-                return PartialView("ChatPartials/PartialMessages", message);
+                return PartialView("ChatPartials/PartialMessages");
             }
             else
             {
