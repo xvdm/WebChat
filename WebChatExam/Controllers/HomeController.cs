@@ -12,9 +12,6 @@ using WebChatExam.Models;
 using WebChatExam.Models.Chats;
 using Microsoft.EntityFrameworkCore;
 using WebChatExam.Models.Repositories;
-using System.Web.WebPages;
-using System.Web.Helpers;
-using System.Web;
 
 namespace WebChatExam.Controllers
 {
