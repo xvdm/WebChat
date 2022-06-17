@@ -3,47 +3,72 @@
 }
 
 <div class="messages" id="messages">
-        @if(Repository.CurrentChatId == -1)
+    @if(Repository.CurrentChatId == -1)
+    {
+        <div style="position:absolute; top:50%; width:100%; text-align:center">
+            <h3>Select a chat to start messaging.</h3>
+        </div>
+    }
+    else {
+        if(Repository.Messages.Count == 0)
         {
             <div style="position:absolute; top:50%; width:100%; text-align:center">
-                <h3>Select a chat to start messaging.</h3>
+                <h3>No messages yet.</h3>
             </div>
         }
-        else {
-            if(Repository.Messages.Count == 0)
+        else
+        {
+           <div>
+            @foreach(var message in Repository.Messages)
             {
-                <div style="position:absolute; top:50%; width:100%; text-align:center">
-                    <h3>No messages yet.</h3>
-                </div>
-            }
-            else
-            {
-               <div>
-                @foreach(var message in Repository.Messages)
+                @if (message.Sender.Id == CurrentUser.Id)
                 {
-                    @if (message.Sender.Id == CurrentUser.Id)
-                    {
-                        <div class="message-container message-darker">
-                            <img src=@Url.Content(message.Sender.PhotoUrl) alt="Avatar" class="userImage right">
-                            <p>@message.Text</p>
-                            <span class="message-time-left">@message.Time</span>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="message-container">
-                            <h6>@Repository.Chats.Where(x => x.Id == Repository.CurrentChatId).FirstOrDefault()?.Users.Where(y => y.Id == message.Sender.Id).FirstOrDefault()?.Login</h6>
-                            <img src=@Url.Content(message.Sender.PhotoUrl) alt="Avatar" class="userImage">
-                            <p>@message.Text</p>
-                            <span class="message-time-right">@message.Time</span>
-                        </div>
-                    }
+                    <div class="message-container message-darker">
+                        <img src=@Url.Content(message.Sender.PhotoUrl) alt="Avatar" class="userImage right">
+                        <p>@message.Text</p>
+                        <span class="message-time-left">@message.Time</span>
+                    </div>
                 }
-            </div> 
+                else
+                {
+                    <div class="message-container">
+                        <h6>@Repository.Chats.Where(x => x.Id == Repository.CurrentChatId).FirstOrDefault()?.Users.Where(y => y.Id == message.Sender.Id).FirstOrDefault()?.Login</h6>
+                        <img src=@Url.Content(message.Sender.PhotoUrl) alt="Avatar" class="userImage">
+                        <p>@message.Text</p>
+                        <span class="message-time-right">@message.Time</span>
+                    </div>
+                }
             }
+        </div> 
         }
-        <form method="post" class="inputLine" asp-controller="Home" asp-action="SendMessage" style="position: fixed; bottom: 0; width:44%; height:5%;">
-                <input type="text" placeholder="Enter your message" name="text" autocomplete="off" autofocus>
-                <button type="submit">Send</button>
-        </form>
-    </div>
+    }
+    <form method="post" class="inputLine" asp-controller="Home" asp-action="SendMessage" style="position: fixed; bottom: 0; width:44%; height:5%;">
+            <input type="text" placeholder="Enter your message" name="text" autocomplete="off" autofocus>
+            <button type="submit">Send</button>
+    </form>
+</div>
+
+
+
+                            
+<script type="text/javascript">
+    function submitStudent() {
+        var data = $("#studenteForm").serialize();
+        console.log(data);
+        alert(data);
+        $.ajax({
+            type: 'POST',
+            url: '/Home/CreateStudent',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
+            data: data,
+            success: function (result) {
+                alert('Successfully received Data ');
+                console.log(result);
+            },
+            error: function () {
+                alert('Failed to receive the Data');
+                console.log('Failed ');
+            }
+        })
+    }
+</script>
