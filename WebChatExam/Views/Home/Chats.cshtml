@@ -28,14 +28,15 @@
         })
     }
 
-    function openChat() {
-        var chatId = 1;
+    function openChat(id) {
         $.ajax({
+            traditional: true,
             type: 'POST',
             url: '/Home/OpenChat',
-            data: chatId,
+            data: {"id": id},
             success: function(result) {
                 $("#messages").html(result);
+                document.getElementById("messageInput").focus();
             }
         })
     }

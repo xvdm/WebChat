@@ -31,9 +31,6 @@ namespace WebChatExam.Controllers
             var chats = _context.Users.Include(c => c.Chats).Where(x => x.Id == CurrentUser.Id).FirstOrDefault().Chats;
             Repository.Chats = chats;
 
-            if(chats.Count > 0)
-                OpenChat(chats.Where(x=> x.Id == Repository.CurrentChatId).FirstOrDefault());
-
             if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
             else return View();
         }
@@ -132,16 +129,15 @@ namespace WebChatExam.Controllers
         }
 
         [HttpPost]
-        public IActionResult OpenChat(ChatModel chat)
+        public IActionResult OpenChat(string id)
         {
-            if (chat != null)
-            {
-                Repository.Messages.Clear();
-                var messages = _context.Messages.Include(m => m.Chat).Include(x=>x.Chat.Users).Where(x => x.Chat.Id == chat.Id).ToList();
-                Repository.CurrentChatId = chat.Id;
-                Repository.Messages = messages;
-            }
-            return RedirectToAction("Chats");
+            int chatId = int.Parse(id);
+            Repository.Messages.Clear();
+            var messages = _context.Messages.Include(m => m.Chat).Include(x => x.Chat.Users).Where(x => x.Chat.Id == chatId).ToList();
+            Repository.CurrentChatId = chatId;
+            Repository.Messages = messages;
+
+            return PartialView("ChatPartials/PartialMessages");
         }
 
         [HttpPost]
