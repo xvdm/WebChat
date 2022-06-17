@@ -19,7 +19,8 @@
             data: message,
             success: function (result) {
                 //alert('Successfully received message');
-                alert(result);
+                //alert(result);
+                $("#messages").html(result);
                 //location.reload();
             }//,
             //error: function () {
@@ -30,9 +31,15 @@
 </script>
 
 <div class="chatsPage">
-    @await Html.PartialAsync("ChatPartials/PartialChatsList")
+    <div class="chats" id="chats">
+        @await Html.PartialAsync("ChatPartials/PartialChatsList")
+    </div>
     
-    @await Html.PartialAsync("ChatPartials/PartialMessages")
+    <div class="messages" id="messages"> 
+        @await Html.PartialAsync("ChatPartials/PartialMessages")
+    </div>
     
-    @await Html.PartialAsync("ChatPartials/PartialChatSettings")
+    <div class="chatSettings" id="settings"> 
+        @await Html.PartialAsync("ChatPartials/PartialChatSettings")
+    </div>
 </div>

@@ -146,9 +146,9 @@ namespace WebChatExam.Controllers
 
                 _context.SaveChanges();
 
-                Console.WriteLine("rabotaet");
+                //Console.WriteLine("rabotaet");
                 //return RedirectToAction("Chats");
-                return PartialView("ChatPartials/PartialMessages");
+                return PartialView("ChatPartials/PartialMessages", message);
             }
             else
             {

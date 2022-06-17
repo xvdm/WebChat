@@ -2,31 +2,29 @@
 @{
 }
 
-<div class="chats" id="chats">
-        <form method="post" class="inputLine" asp-controller="Home" asp-action="CreateChat">
-            <input type="text" placeholder="Enter a name for a new chat" name="name" autocomplete="off">
-            <button type="submit">Create chat</button>
+    <form method="post" class="inputLine" asp-controller="Home" asp-action="CreateChat">
+        <input type="text" placeholder="Enter a name for a new chat" name="name" autocomplete="off">
+        <button type="submit">Create chat</button>
+    </form>
+    <form method="post" class="inputLine" asp-controller="Home" asp-action="ChatsSearch">
+        <input type="text" placeholder="Search.." name="search" autocomplete="off">
+        <button type="submit">Search</button>
+    </form> 
+    @foreach(var chat in Repository.Chats)
+    {
+        <form method="post" asp-controller="Home" asp-action="OpenChat">
+            <div class="chat-container">
+                <input type="hidden" value="@chat.Id" name="Id" />
+                <input type="hidden" value="@chat.Messages" name="Messages" />
+                <input type="hidden" value="@chat.Name" name="Name" />
+                <input type="hidden" value="@chat.PhotoUrl" name="PhotoUrl" />
+                <input type="hidden" value="@chat.Users" name="Users" />
+                <input type="submit" class="chatSubmit" value=""/>
+                <img src=@Url.Content(chat.PhotoUrl) alt="Avatar">
+                <p><strong>@chat.Name</strong></p>
+                <p>Last message</p>
+                <span class="time-left">11:00</span>
+                <span class="dot">??</span>
+            </div>
         </form>
-        <form method="post" class="inputLine" asp-controller="Home" asp-action="ChatsSearch">
-            <input type="text" placeholder="Search.." name="search" autocomplete="off">
-            <button type="submit">Search</button>
-        </form> 
-        @foreach(var chat in Repository.Chats)
-        {
-            <form method="post" asp-controller="Home" asp-action="OpenChat">
-                <div class="chat-container">
-                    <input type="hidden" value="@chat.Id" name="Id" />
-                    <input type="hidden" value="@chat.Messages" name="Messages" />
-                    <input type="hidden" value="@chat.Name" name="Name" />
-                    <input type="hidden" value="@chat.PhotoUrl" name="PhotoUrl" />
-                    <input type="hidden" value="@chat.Users" name="Users" />
-                    <input type="submit" class="chatSubmit" value=""/>
-                    <img src=@Url.Content(chat.PhotoUrl) alt="Avatar">
-                    <p><strong>@chat.Name</strong></p>
-                    <p>Last message</p>
-                    <span class="time-left">11:00</span>
-                    <span class="dot">??</span>
-                </div>
-            </form>
-        }
-    </div>
+    }
