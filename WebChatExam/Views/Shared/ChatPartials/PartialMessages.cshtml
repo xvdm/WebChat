@@ -1,23 +1,24 @@
 ﻿@using WebChatExam.Models.Repositories
 @{
 }
-                            
+                                      
 <script type="text/javascript">
     function sendMessage() {
         var message = $("#messageInput").serialize();
-        alert(message);
-
+        //alert(message);
         $.ajax({
             type: 'POST',
             url: '/Home/SendMessage',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: message,
             success: function (result) {
-                alert('Successfully received message ');
-            },
-            error: function () {
-                alert('Failed to receive the message');
-            }
+                //alert('Successfully received message');
+                //alert(result);
+                location.reload();
+            }//,
+            //error: function () {
+            //    alert('Failed to receive the message');
+            //}
         })
     }
 </script>
@@ -71,3 +72,4 @@
             <button type="button" onclick="sendMessage()">Send</button>
     </form>
 </div>
+

@@ -132,7 +132,7 @@ namespace WebChatExam.Controllers
         //}
 
         [HttpPost]
-        public async Task<IActionResult> SendMessage(string text)
+        public IActionResult SendMessage(string text)
         {
             if (text != null && text.Length > 0 && text.Trim().Length > 0)
             {
@@ -146,7 +146,9 @@ namespace WebChatExam.Controllers
 
                 _context.SaveChanges();
 
-                return RedirectToAction("Chats");
+                Console.WriteLine("rabotaet");
+                //return RedirectToAction("Chats");
+                return PartialView("ChatPartials/PartialMessages");
             }
             else
             {
