@@ -85,8 +85,14 @@
                 url: '/Home/LeaveChat',
                 data: captcha,
                 success: function(result) {
-                    alert(result);
                     $("#chats").html(result);
+                }
+            })
+            $.ajax({
+                type: 'GET',
+                url: '/Home/UpdateMessages',
+                success: function(result) {
+                    $("#messages").html(result);
                 }
             })
         }
