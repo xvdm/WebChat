@@ -197,8 +197,11 @@ namespace WebChatExam.Controllers
                 UserModel user = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
                 chat.Users.Remove(user);
                 _context.SaveChanges();
-                Repository.Chats.Remove(chat);
+
+                var chats = _context.Users.Include(c => c.Chats).Where(x => x.Id == CurrentUser.Id).FirstOrDefault().Chats;
+                Repository.Chats = chats;
                 Repository.CurrentChatId = -1;
+
                 return PartialView("ChatPartials/PartialChatsList");
             }
             else
