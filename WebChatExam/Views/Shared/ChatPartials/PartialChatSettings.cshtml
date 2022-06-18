@@ -6,7 +6,7 @@
     <input type="text" placeholder="Enter username" name="login" autocomplete="off">
     <button type="submit">Add</button>
 </form>
-<form method="get" class="inputLine" asp-controller="Home" asp-action="LeaveChat">
-     <input type="text" placeholder="Enter 'LEAVE' to leave chat" name="captcha" id="captcha" autocomplete="off">
-    <button type="submit">Leave</button>
+<form class="inputLine">
+     <input type="text" placeholder="Enter 'LEAVE' to leave chat" name="captcha" id="captchaForLeavingChat" autocomplete="off">
+     <button type="button" onclick="leaveChat()">Leave</button>
 </form>
