@@ -65,6 +65,18 @@
                 }
             })
         }
+
+        function createChat() {
+            var chatName = $("#createChatInput").serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/Home/CreateChat',
+                data: chatName,
+                success: function (result) {
+                    $("#chats").html(result);
+                }
+            })
+        }
     
         function changePhoto() {
             document.getElementById("currentImage").src = URL.createObjectURL(document.getElementById("photoInput").files[0]);

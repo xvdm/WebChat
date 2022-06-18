@@ -103,7 +103,9 @@ namespace WebChatExam.Controllers
 
                 _context.Chats.Add(chat);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                Repository.Chats.Add(chat);
+
+                return PartialView("ChatPartials/PartialChatsList");
             }
             else
             {
