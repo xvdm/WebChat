@@ -141,16 +141,17 @@ namespace WebChatExam.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateUserInfo(IFormFile uploadFile, LoginModel model)
+        public async Task<IActionResult> UpdateUserInfo(IFormFile uploadFile, LoginModel model)
         {
             if (ModelState.IsValid)
             {
                 if(uploadFile != null)
                 {
-                    string path = "/images/" + uploadFile.FileName;
+                    string filetype = uploadFile.FileName.Substring(uploadFile.FileName.LastIndexOf('.') + 1);
+                    string path = $"/images/{CurrentUser.Id}.{filetype}";
                     using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                     {
-                        uploadFile.CopyToAsync(fileStream);
+                        await uploadFile.CopyToAsync(fileStream);
                     }
                     CurrentUser.UpdatePhoto(path);
                     _context.Users.Where(x => x.Id == CurrentUser.Id).FirstOrDefault().PhotoUrl = path;
