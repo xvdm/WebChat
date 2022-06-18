@@ -191,7 +191,7 @@ namespace WebChatExam.Controllers
         [HttpPost]
         public IActionResult LeaveChat(string captcha)
         {
-            if(Repository.CurrentChatId >= 0 && captcha == "LEAVE")
+            if(Repository.CurrentChatId >= 0/* && captcha == "LEAVE"*/)
             {
                 ChatModel chat = _context.Chats.Where(x=> x.Id == Repository.CurrentChatId).Include(c=>c.Users).FirstOrDefault();
                 UserModel user = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
@@ -200,20 +200,19 @@ namespace WebChatExam.Controllers
 
                 var chats = _context.Users.Include(c => c.Chats).Where(x => x.Id == CurrentUser.Id).FirstOrDefault().Chats;
                 Repository.Chats = chats;
-                Repository.CurrentChatId = -1;
 
-                return PartialView("ChatPartials/PartialChatsList");
+                Repository.CurrentChatId = -1;
+                Repository.Messages.Clear();
+                //var messages = _context.Messages.Include(m => m.Chat).Include(x => x.Chat.Users).Where(x => x.Chat.Id == Repository.CurrentChatId).ToList();
+                //Repository.Messages = messages;
             }
-            else
-            {
-                var error = new ErrorViewModel();
-                return View("Error", error);
-            }
+            return PartialView("IndexPartials/PartialChats");
         }
 
         [HttpGet]
         public IActionResult UpdateMessages()
         {
+            Repository.CurrentChatId = -1;
             Repository.Messages.Clear();
             var messages = _context.Messages.Include(m => m.Chat).Include(x => x.Chat.Users).Where(x => x.Chat.Id == Repository.CurrentChatId).ToList();
             Repository.Messages = messages;
