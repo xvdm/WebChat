@@ -1,7 +1,8 @@
 ﻿.chat-container {
     border-radius: 5px;
-    max-height:118px;
-    height:118px;
+    max-height: 118px;
+    height: 118px;
+    cursor: pointer;
 }
 
 .chat-container::after {

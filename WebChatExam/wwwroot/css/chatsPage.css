@@ -10,7 +10,6 @@
     left: 0;
     position: fixed;
     overflow-y: scroll;
-    cursor: pointer;
 }
 .messages {
     display: flex;
