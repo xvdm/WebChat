@@ -79,14 +79,13 @@
         }
 
         function leaveChat() {
-            alert("leavechat");
             var captcha = $("#captchaForLeavingChat").serialize();
-            alert(captcha);
             $.ajax({
                 type: 'POST',
                 url: '/Home/LeaveChat',
                 data: captcha,
                 success: function(result) {
+                    alert(result);
                     $("#chats").html(result);
                 }
             })
