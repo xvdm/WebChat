@@ -86,19 +86,9 @@
                 url: '/Home/LeaveChat',
                 data: captcha,
                 success: function(result) {
-                    //alert(result);
                     $("#IndexDiv").html(result);
                 }
             })
-
-            //$.ajax({
-            //    type: 'GET',
-            //    url: '/Home/UpdateMessages',
-            //    success: function(result) {
-            //        alert(result);
-            //        $("#messages").html(result);
-            //    }
-            //})
         }
     
         function changePhoto() {

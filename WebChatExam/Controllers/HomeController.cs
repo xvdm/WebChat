@@ -203,20 +203,8 @@ namespace WebChatExam.Controllers
 
                 Repository.CurrentChatId = -1;
                 Repository.Messages.Clear();
-                //var messages = _context.Messages.Include(m => m.Chat).Include(x => x.Chat.Users).Where(x => x.Chat.Id == Repository.CurrentChatId).ToList();
-                //Repository.Messages = messages;
             }
             return PartialView("IndexPartials/PartialChats");
-        }
-
-        [HttpGet]
-        public IActionResult UpdateMessages()
-        {
-            Repository.CurrentChatId = -1;
-            Repository.Messages.Clear();
-            var messages = _context.Messages.Include(m => m.Chat).Include(x => x.Chat.Users).Where(x => x.Chat.Id == Repository.CurrentChatId).ToList();
-            Repository.Messages = messages;
-            return PartialView("ChatPartials/PartialMessages");
         }
 
         private static UInt64 CalculateHash(string read)
