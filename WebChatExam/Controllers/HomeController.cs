@@ -188,7 +188,7 @@ namespace WebChatExam.Controllers
             return View("Settings");
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult LeaveChat(string captcha)
         {
             if(Repository.CurrentChatId >= 0 && captcha == "LEAVE")
@@ -196,6 +196,7 @@ namespace WebChatExam.Controllers
                 ChatModel chat = _context.Chats.Where(x=> x.Id == Repository.CurrentChatId).FirstOrDefault();
                 _context.Chats.Remove(chat);
                 _context.SaveChanges();
+                Repository.Chats.Remove(chat);
                 Repository.CurrentChatId = -1;
             }
             else
@@ -203,7 +204,7 @@ namespace WebChatExam.Controllers
                 var error = new ErrorViewModel();
                 return View("Error", error);
             }
-            return RedirectToAction("Index");
+            return PartialView("ChatPartials/PartialChatsList");
         }
 
         private static UInt64 CalculateHash(string read)

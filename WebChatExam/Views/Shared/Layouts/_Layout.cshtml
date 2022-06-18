@@ -77,6 +77,18 @@
                 }
             })
         }
+
+        function leaveChat() {
+            var captcha = $("#captchaForLeavingChat").serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/Home/LeaveChat',
+                data: captcha,
+                success: function(result) {
+                    $("#chats").html(result);
+                }
+            })
+        }
     
         function changePhoto() {
             document.getElementById("currentImage").src = URL.createObjectURL(document.getElementById("photoInput").files[0]);
