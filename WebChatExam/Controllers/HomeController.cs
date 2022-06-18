@@ -26,7 +26,7 @@ namespace WebChatExam.Controllers
             _appEnvironment = appEnvironment;
         }
 
-        public IActionResult Chats()
+        public IActionResult Index()
         {
             var chats = _context.Users.Include(c => c.Chats).Where(x => x.Id == CurrentUser.Id).FirstOrDefault().Chats;
             Repository.Chats = chats;
@@ -76,7 +76,7 @@ namespace WebChatExam.Controllers
                 var error = new ErrorViewModel();
                 return View("Error", error);
             }
-            return RedirectToAction("Chats");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -95,7 +95,7 @@ namespace WebChatExam.Controllers
 
                 _context.Chats.Add(chat);
                 _context.SaveChanges();
-                return RedirectToAction("Chats");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -193,7 +193,7 @@ namespace WebChatExam.Controllers
                 var error = new ErrorViewModel();
                 return View("Error", error);
             }
-            return RedirectToAction("Chats");
+            return RedirectToAction("Index");
         }
 
         private static UInt64 CalculateHash(string read)

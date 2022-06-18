@@ -1,0 +1,20 @@
+﻿@using WebChatExam.Models.Repositories
+@{
+    ViewData["Title"] = "Chats";
+}
+
+<link rel="stylesheet" href="~/css/chatsPage.css" />
+<link rel="stylesheet" href="~/css/chatsList.css" />
+<link rel="stylesheet" href="~/css/messages.css" />
+
+<div class="chats" id="chats">
+    @await Html.PartialAsync("ChatPartials/PartialChatsList")
+</div>
+
+<div class="messages" id="messages"> 
+    @await Html.PartialAsync("ChatPartials/PartialMessages")
+</div>
+
+<div class="chatSettings" id="settings"> 
+    @await Html.PartialAsync("ChatPartials/PartialChatSettings")
+</div>

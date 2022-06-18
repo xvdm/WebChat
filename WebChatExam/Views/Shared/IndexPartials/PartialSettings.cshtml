@@ -1,0 +1,42 @@
+﻿@model LoginModel
+@using Microsoft.AspNetCore.Http
+@{
+}
+
+<link rel="stylesheet" href="~/css/settings.css" />
+
+
+<form method="post" asp-antiforgery="true" asp-controller="Home" asp-action="UpdateUserInfo" enctype="multipart/form-data">
+    <br />
+    <div class="photo-container">
+        <img src=@Url.Content(CurrentUser.PhotoUrl) alt="Avatar" class="photo-image" id="currentImage">
+        <div class="photo-overlay">
+            <input type="file" accept="image/*" name="uploadFile" class="changePhotoSubmit" onchange="changePhoto()" id="photoInput"/>
+            <p class="photo-text">Change photo</p>
+        </div>
+    </div> 
+
+    <hr>
+
+    <div class="LoginPassword">
+        <div>
+            <label asp-for="Login"><b></b></label>
+            <input type="text" placeholder="Enter new Login" asp-for="Login" class="loginInput">
+            <span asp-validation-for="Login"/>
+        </div>
+        <br />
+        <div>
+            <label asp-for="Password"><b></b></label>
+            <input type="password" placeholder="Enter new Password" asp-for="Password" autocomplete="off" class="loginInput">
+            <span asp-validation-for="Password"/>
+        </div>
+        <hr>
+        <button type="submit" id="changePhotoBtn">Save</button>
+    </div>
+</form>
+
+
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

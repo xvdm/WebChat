@@ -12,6 +12,44 @@
     <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+ 
+    <script type="text/javascript">
+        document.addEventListener('keydown', function(event) {
+            if (event.code == 'Enter') {
+                document.getElementById("sendMessageButton").focus();
+            }   
+        });
+    
+        function sendMessage() {
+            var message = $("#messageInput").serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/Home/SendMessage',
+                data: message,
+                success: function (result) {
+                    $("#messages").html(result);
+                    document.getElementById("messageInput").focus();
+                }
+            })
+        }
+    
+        function openChat(id) {
+            $.ajax({
+                traditional: true,
+                type: 'POST',
+                url: '/Home/OpenChat',
+                data: {"id": id},
+                success: function(result) {
+                    $("#messages").html(result);
+                    document.getElementById("messageInput").focus();
+                }
+            })
+        }
+    
+        function changePhoto() {
+            document.getElementById("currentImage").src = URL.createObjectURL(document.getElementById("photoInput").files[0]);
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -20,7 +58,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link txt-color" asp-controller="Home" asp-action="Chats">Chats</a>
+                            <a class="nav-link txt-color" asp-controller="Home" asp-action="Index">Chats</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link txt-color" asp-controller="Home" asp-action="Settings">Settings</a>
