@@ -2,12 +2,6 @@
     Layout = "Layouts/_Layout";
 }
 
-<div>
-    <div class="chatsPage">
-        @await Html.PartialAsync("IndexPartials/PartialChats")
-    </div>
-
-    <div class="profile-edit" hidden="hidden">
-        @await Html.PartialAsync("IndexPartials/PartialSettings")
-    </div>
+<div id="IndexDiv">
+    @await Html.PartialAsync("IndexPartials/PartialChats")
 </div>

@@ -21,11 +21,23 @@
         });
 
         function openChatsPage() {
-            alert("Chats opened");
+            $.ajax({
+                type: 'GET',
+                url: '/Home/Chats',
+                success: function (result) {
+                    $("#IndexDiv").html(result);
+                }
+            })
         }
 
         function openSettingsPage() {
-            alert("Settings opened");
+            $.ajax({
+                type: 'GET',
+                url: '/Home/Settings',
+                success: function (result) {
+                    $("#IndexDiv").html(result);
+                }
+            })
         }
     
         function sendMessage() {

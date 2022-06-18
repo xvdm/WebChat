@@ -35,10 +35,18 @@ namespace WebChatExam.Controllers
             else return View();
         }
 
+        [HttpGet] 
+        public IActionResult Chats()
+        {
+            if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
+            else return PartialView("IndexPartials/PartialChats");
+        }
+
+        [HttpGet]
         public IActionResult Settings()
         {
             if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
-            else return View();
+            else return PartialView("IndexPartials/PartialSettings");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
