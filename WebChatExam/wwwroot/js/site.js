@@ -31,3 +31,13 @@ if (tumbler != null) {
         document.cookie = "theme=" + currentTheme;
     });
 }
+
+document.addEventListener('keydown', function (event) {
+    if (event.code == 'Enter') {
+        document.getElementById("sendMessageButton").focus();
+    }
+});
+
+function changePhoto() {
+    document.getElementById("currentImage").src = URL.createObjectURL(document.getElementById("photoInput").files[0]);
+}
