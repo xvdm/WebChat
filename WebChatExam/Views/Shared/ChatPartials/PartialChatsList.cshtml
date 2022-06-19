@@ -1,5 +1,6 @@
 ﻿@using WebChatExam.Models.Repositories
 @{
+   
 }
 
 <form class="inputLine">
@@ -13,13 +14,21 @@
 @foreach(var chat in Repository.Chats)
 {
     <form>
+        
         <div class="chat-container">
             <input type="hidden" value="@chat.Id" name="Id" />
             <input type="hidden" value="@chat.Messages" name="Messages" />
             <input type="hidden" value="@chat.Name" name="Name" />
             <input type="hidden" value="@chat.PhotoUrl" name="PhotoUrl" />
             <input type="hidden" value="@chat.Users" name="Users" />
-            <input type="button" class="chatSubmit" value="" id="openChatButton" onclick="openChat(@chat.Id.ToString())"/>
+            @if(chat.Id == Repository.CurrentChatId)
+            {
+                <input type="button" class="chatSubmit selectedChat" value="" id="openChatButton" onclick="openChat(@chat.Id.ToString())"/> 
+            }
+            else
+            {
+                <input type="button" class="chatSubmit" value="" id="openChatButton" onclick="openChat(@chat.Id.ToString())"/> 
+            }
             <img src=@Url.Content(chat.PhotoUrl) alt="Avatar">
             <p><strong>@chat.Name</strong></p>
             <p id=@chat.Id>@chat.Messages.LastOrDefault()?.Text</p>

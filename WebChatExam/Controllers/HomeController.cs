@@ -127,7 +127,7 @@ namespace WebChatExam.Controllers
             Repository.CurrentChatId = chatId;
             Repository.Messages = messages;
 
-            return PartialView("ChatPartials/PartialMessages");
+            return PartialView("IndexPartials/PartialChats");
         }
 
         [HttpPost]

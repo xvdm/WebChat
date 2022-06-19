@@ -47,7 +47,7 @@ function openChat(id) {
         url: '/Home/OpenChat',
         data: { "id": id },
         success: function (result) {
-            $("#messages").html(result);
+            $("#IndexDiv").html(result);
             document.getElementById("messageInput").focus();
         }
     })

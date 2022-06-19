@@ -72,6 +72,10 @@ hr {
     color: var(--text);
 }
 
+.selectedChat {
+    background-color: black;
+}
+
 .dot {
     background-color: var(--semi-dark);
 }
