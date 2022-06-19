@@ -22,8 +22,17 @@
             <input type="button" class="chatSubmit" value="" id="openChatButton" onclick="openChat(@chat.Id.ToString())"/>
             <img src=@Url.Content(chat.PhotoUrl) alt="Avatar">
             <p><strong>@chat.Name</strong></p>
-            <p>Last message</p>
-            <span class="time-left">11:00</span>
+            <p>@chat.Messages.LastOrDefault()?.Text</p>
+            <span class="time-left">
+                @if(chat.Messages.LastOrDefault()?.Time.Date == DateTime.Now.Date)
+                {
+                    @chat.Messages.LastOrDefault()?.Time.ToString("t")
+                }
+                else
+                {
+                    @chat.Messages.LastOrDefault()?.Time.Date.ToString("d")
+                }
+            </span>
             <span class="dot">??</span>
         </div>
     </form>
