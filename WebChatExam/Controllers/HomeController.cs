@@ -113,7 +113,7 @@ namespace WebChatExam.Controllers
                 Repository.Messages.Add(message);
                 //Repository.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId).Messages.Add(message);
 
-                //Repository.UpdateChats(_context, currentUser);
+                Repository.UpdateChats(_context, currentUser);
             }
             return PartialView("ChatPartials/PartialMessages");
         }

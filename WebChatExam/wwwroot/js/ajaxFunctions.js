@@ -24,8 +24,17 @@ function sendMessage() {
         type: 'POST',
         url: '/Home/SendMessage',
         data: message,
+        async: false,
         success: function (result) {
             $("#messages").html(result);
+        }
+    })
+    $.ajax({
+        type: 'GET',
+        url: '/Home/Chats',
+        async: false,
+        success: function (result) {
+            $("#IndexDiv").html(result);
             document.getElementById("messageInput").focus();
         }
     })
