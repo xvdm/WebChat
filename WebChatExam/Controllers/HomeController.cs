@@ -191,7 +191,7 @@ namespace WebChatExam.Controllers
         [HttpPost]
         public IActionResult LeaveChat(string captcha)
         {
-            if(Repository.CurrentChatId >= 0/* && captcha == "LEAVE"*/)
+            if(Repository.CurrentChatId >= 0 && captcha == "LEAVE")
             {
                 ChatModel chat = _context.Chats.Where(x=> x.Id == Repository.CurrentChatId).Include(c=>c.Users).FirstOrDefault();
                 UserModel user = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
