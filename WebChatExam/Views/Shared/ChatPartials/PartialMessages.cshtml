@@ -20,19 +20,31 @@ else {
        <div>
             @foreach(var message in Repository.Messages)
             {
-                @if (message.Sender.Id == CurrentUser.Id)
+                @if(message.Sender is not null)
                 {
-                    <div class="message-container message-darker">
-                        <img src=@Url.Content(message.Sender.PhotoUrl) alt="Avatar" class="userImage right">
-                        <p>@message.Text</p>
-                        <span class="message-time-left">@message.Time</span>
-                    </div>
+                    @if (message.Sender.Id == CurrentUser.Id)
+                    {
+                        <div class="message-container message-darker">
+                            <img src=@Url.Content(message.Sender.PhotoUrl) alt="Avatar" class="userImage right">
+                            <p>@message.Text</p>
+                            <span class="message-time-left">@message.Time</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="message-container">
+                            <h6>@Repository.Chats.Where(x => x.Id == Repository.CurrentChatId).FirstOrDefault()?.Users.Where(y => y.Id == message.Sender.Id).FirstOrDefault()?.Login</h6>
+                            <img src=@Url.Content(message.Sender.PhotoUrl) alt="Avatar" class="userImage">
+                            <p>@message.Text</p>
+                            <span class="message-time-right">@message.Time</span>
+                        </div>
+                    }
                 }
                 else
                 {
                     <div class="message-container">
-                        <h6>@Repository.Chats.Where(x => x.Id == Repository.CurrentChatId).FirstOrDefault()?.Users.Where(y => y.Id == message.Sender.Id).FirstOrDefault()?.Login</h6>
-                        <img src=@Url.Content(message.Sender.PhotoUrl) alt="Avatar" class="userImage">
+                        <h6>Unknown</h6>
+                        <img src="~/images/default-user.png" alt="Avatar" class="userImage">
                         <p>@message.Text</p>
                         <span class="message-time-right">@message.Time</span>
                     </div>
