@@ -10,16 +10,13 @@
 <div class="chatsPage" id="ChatsPageDiv">
     <div class="chats" id="chats">
         @await Html.PartialAsync("ChatPartials/PartialChatsList")
-        @*<partial name="ChatPartials/PartialChatsList"></partial>*@
     </div>
     
     <div class="messages" id="messages"> 
         @await Html.PartialAsync("ChatPartials/PartialMessages")
-        @*<partial name="ChatPartials/PartialMessages"></partial>*@
     </div>
     
     <div class="chatSettings" id="settings"> 
         @await Html.PartialAsync("ChatPartials/PartialChatSettings")
-        @*<partial name="ChatPartials/PartialChatSettings"></partial>*@
     </div>
 </div>

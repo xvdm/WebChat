@@ -75,8 +75,8 @@ function addUserToChat() {
         url: '/Home/AddUserToChat',
         data: login,
         success: function (result) {
-            alert(result);
-            $("IndexDiv").html(result);
+            $("#IndexDiv").html(result);
         }
     })
 }
+

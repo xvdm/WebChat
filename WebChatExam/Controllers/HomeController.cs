@@ -71,25 +71,6 @@ namespace WebChatExam.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddUserToChat(string login)
-        {
-            var user = _context.Users.FirstOrDefault(x => x.Login == login);
-            if (user is not null)
-            {
-                var chat = _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId);
-                user.Chats.Add(chat);
-                chat.Users.Add(user);
-                _context.SaveChanges();
-            }
-            else
-            {
-                var error = new ErrorViewModel();
-                //return View("Error", error);
-            }
-            return PartialView("IndexPartials/PartialChats");
-        }
-
-        [HttpPost]
         public IActionResult CreateChat(string name)
         {
             if(name != null && name.Length > 0 && name.Trim().Length > 0)
@@ -191,6 +172,26 @@ namespace WebChatExam.Controllers
         }
 
         [HttpPost]
+        public IActionResult AddUserToChat(string login)
+        {
+            var user = _context.Users.FirstOrDefault(x => x.Login == login);
+            if (user is not null)
+            {
+                var chat = _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId);
+                user.Chats.Add(chat);
+                chat.Users.Add(user);
+                _context.SaveChanges();
+
+                var chats = _context.Chats.Where(x => x.Users.Contains(user)).Include(x => x.Users).Include(x => x.Messages).ToList();
+                Repository.Chats = chats;
+                Repository.Messages.Clear();
+                var messages = _context.Messages.Include(m => m.Chat).Include(x => x.Chat.Users).Where(x => x.Chat.Id == Repository.CurrentChatId).ToList();
+                Repository.Messages = messages;
+            }
+            return PartialView("IndexPartials/PartialChats");
+        }
+
+        [HttpPost]
         public IActionResult LeaveChat(string captcha)
         {
             if(Repository.CurrentChatId >= 0 && captcha == "LEAVE")
@@ -200,7 +201,7 @@ namespace WebChatExam.Controllers
                 chat.Users.Remove(user);
                 _context.SaveChanges();
 
-                var chats = _context.Users.Include(c => c.Chats).Where(x => x.Id == CurrentUser.Id).FirstOrDefault().Chats;
+                var chats = _context.Chats.Where(x => x.Users.Contains(user)).Include(x => x.Users).Include(x => x.Messages).ToList();
                 Repository.Chats = chats;
 
                 Repository.CurrentChatId = -1;
