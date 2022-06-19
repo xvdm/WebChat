@@ -111,11 +111,11 @@ namespace WebChatExam.Controllers
                 _context.Messages.Add(message);
                 _context.SaveChanges();
                 Repository.Messages.Add(message);
-                Repository.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId).Messages.Add(message);
+                //Repository.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId).Messages.Add(message);
 
-                Repository.UpdateChats(_context, currentUser);
+                //Repository.UpdateChats(_context, currentUser);
             }
-            return PartialView("IndexPartials/PartialChats");
+            return PartialView("ChatPartials/PartialMessages");
         }
 
         [HttpPost]

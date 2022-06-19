@@ -18,18 +18,18 @@ function openSettingsPage() {
     })
 }
 
-function sendMessage() {
-    var message = $("#messageInput").serialize();
-    $.ajax({
-        type: 'POST',
-        url: '/Home/SendMessage',
-        data: message,
-        success: function (result) {
-            $("#IndexDiv").html(result);
-            document.getElementById("messageInput").focus();
-        }
-    })
-}
+//function sendMessage() {
+//    var message = $("#messageInput").serialize();
+//    $.ajax({
+//        type: 'POST',
+//        url: '/Home/SendMessage',
+//        data: message,
+//        success: function (result) {
+//            $("#IndexDiv").html(result);
+//            document.getElementById("messageInput").focus();
+//        }
+//    })
+//}
 
 function openChat(id) {
     $.ajax({

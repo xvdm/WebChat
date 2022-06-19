@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using WebChatExam.Models.Repositories
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,6 +13,21 @@
     <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        function sendMessage() {
+            var message = $("#messageInput").serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/Home/SendMessage',
+                data: message,
+                success: function (result) {
+                    $("#messages").html(result);
+                    document.getElementById("messageInput").focus();
+                }
+            })
+        }
+    </script>
 </head>
 <body>
     <header>
