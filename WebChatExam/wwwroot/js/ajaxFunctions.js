@@ -58,13 +58,25 @@ function createChat() {
 
 function leaveChat() {
     var captcha = $("#captchaForLeavingChat").serialize();
-    $.ajax(
-        {
-            type: 'POST',
-            url: '/Home/LeaveChat',
-            data: captcha,
-            success: function (result) {
-                $("#IndexDiv").html(result);
-            }
-        })
+    $.ajax({
+        type: 'POST',
+        url: '/Home/LeaveChat',
+        data: captcha,
+        success: function (result) {
+            $("#IndexDiv").html(result);
+        }
+    })
+}
+
+function addUserToChat() {
+    var login = $("#loginAddToChat").serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/Home/AddUserToChat',
+        data: login,
+        success: function (result) {
+            alert(result);
+            $("IndexDiv").html(result);
+        }
+    })
 }

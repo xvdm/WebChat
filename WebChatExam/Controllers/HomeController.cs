@@ -82,9 +82,9 @@ namespace WebChatExam.Controllers
             else
             {
                 var error = new ErrorViewModel();
-                return View("Error", error);
+                //return View("Error", error);
             }
-            return RedirectToAction("Index");
+            return PartialView("IndexPartials/PartialChats");
         }
 
         [HttpPost]
