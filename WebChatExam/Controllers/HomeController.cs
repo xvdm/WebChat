@@ -173,7 +173,7 @@ namespace WebChatExam.Controllers
                     if (_context.Users.Where(x => x.Login == model.Login).Any())
                     {
                         var error = new ErrorViewModel();
-                        return View("Error", error);
+                        //return View("Error", error);
                     }
                     UserModel user = new UserModel();
                     user.Login = model.Login;
@@ -185,7 +185,7 @@ namespace WebChatExam.Controllers
                     CurrentUser.EditUser(user);
                 }
             }
-            return View("Settings");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
