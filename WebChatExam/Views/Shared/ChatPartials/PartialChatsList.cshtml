@@ -30,7 +30,16 @@
             }
             <img src=@Url.Content(chat.PhotoUrl) alt="Avatar">
             <p><strong>@chat.Name</strong></p>
-            <p id=@chat.Id>@chat.Messages.LastOrDefault()?.Text</p>
+            <p id=@chat.Id>
+                @if(@chat.Messages.LastOrDefault()?.Text.Length > 30)
+                {
+                    @chat.Messages.LastOrDefault()?.Text.Substring(0,30).Insert(30,"...")
+                }
+                else
+                {
+                    @chat.Messages.LastOrDefault()?.Text
+                }
+            </p>
             <span class="time-left"> 
                 @if(chat.Messages.LastOrDefault()?.Time.Date == DateTime.Now.Date)
                 {
