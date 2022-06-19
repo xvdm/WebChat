@@ -23,7 +23,7 @@
             <img src=@Url.Content(chat.PhotoUrl) alt="Avatar">
             <p><strong>@chat.Name</strong></p>
             <p>@chat.Messages.LastOrDefault()?.Text</p>
-            <span class="time-left">
+            <span class="time-left"> 
                 @if(chat.Messages.LastOrDefault()?.Time.Date == DateTime.Now.Date)
                 {
                     @chat.Messages.LastOrDefault()?.Time.ToString("t")

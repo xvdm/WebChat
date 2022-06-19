@@ -28,10 +28,8 @@ namespace WebChatExam.Controllers
 
         public IActionResult Index()
         {
-            //var chats = _context.Users.Include(c => c.Chats).Where(x => x.Id == CurrentUser.Id).FirstOrDefault().Chats;
             var user = _context.Users.Where(x => x.Id == CurrentUser.Id).FirstOrDefault();
-            var chats = _context.Chats.Where(x => x.Users.Contains(user)).Include(x=>x.Users).Include(x=>x.Messages).ToList();
-            Repository.Chats = chats;
+            Repository.UpdateChats(_context, user);
 
             if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
             else return View();
@@ -102,23 +100,22 @@ namespace WebChatExam.Controllers
         {
             if (text != null && text.Length > 0 && text.Trim().Length > 0)
             {
+                UserModel currentUser = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
+
                 var message = new MessageModel();
                 message.Text = text;
                 message.Time = DateTime.Now;
-                message.Sender = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
+                message.Sender = currentUser;
                 message.Chat = _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId);
 
                 _context.Messages.Add(message);
                 _context.SaveChanges();
                 Repository.Messages.Add(message);
+                Repository.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId).Messages.Add(message);
 
-                return PartialView("ChatPartials/PartialMessages");
+                Repository.UpdateChats(_context, currentUser);
             }
-            else
-            {
-                var error = new ErrorViewModel();
-                return View("Error", error);
-            }
+            return PartialView("IndexPartials/PartialChats");
         }
 
         [HttpPost]

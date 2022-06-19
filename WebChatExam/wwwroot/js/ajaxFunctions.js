@@ -25,7 +25,7 @@ function sendMessage() {
         url: '/Home/SendMessage',
         data: message,
         success: function (result) {
-            $("#messages").html(result);
+            $("#IndexDiv").html(result);
             document.getElementById("messageInput").focus();
         }
     })
