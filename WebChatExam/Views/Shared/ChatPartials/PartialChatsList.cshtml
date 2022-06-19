@@ -1,15 +1,14 @@
 ﻿@using WebChatExam.Models.Repositories
 @{
-   
 }
 
 <form class="inputLine">
     <input type="text" placeholder="Enter a name for a new chat" name="name" id="createChatInput" autocomplete="off">
-    <button type="button" onclick="createChat()">Create chat</button>
+    <button type="button" onclick="createChat()" id="createChatButton">Create chat</button>
 </form>
 <form method="post" class="inputLine" asp-controller="Home" asp-action="ChatsSearch">
-    <input type="text" placeholder="Search.." name="search" autocomplete="off">
-    <button type="submit">Search</button>
+    <input type="text" placeholder="Search.." name="search" autocomplete="off" id="searchInput">
+    <button type="submit" id="searchButton">Search</button>
 </form> 
 @foreach(var chat in Repository.Chats)
 {

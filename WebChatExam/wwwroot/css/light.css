@@ -63,7 +63,9 @@ a {
     background-color: #9999;
 }
 
-
+.selectedChat {
+    background-color: black;
+}
 
 
 
