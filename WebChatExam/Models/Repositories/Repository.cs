@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using WebChatExam.Models.Chats;
@@ -16,6 +17,11 @@ namespace WebChatExam.Models.Repositories
             Chats.Clear();
             Messages.Clear();
             CurrentChatId = -1; 
+        }
+
+        public static void UpdateChats(ApplicationContext context, UserModel user)
+        {
+            Chats = context.Chats.Where(x => x.Users.Contains(user)).Include(x => x.Users).Include(x => x.Messages).ToList();
         }
     }
 }

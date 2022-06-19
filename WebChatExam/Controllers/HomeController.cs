@@ -182,8 +182,9 @@ namespace WebChatExam.Controllers
                 chat.Users.Add(user);
                 _context.SaveChanges();
 
-                var chats = _context.Chats.Where(x => x.Users.Contains(user)).Include(x => x.Users).Include(x => x.Messages).ToList();
-                Repository.Chats = chats;
+                UserModel currentUser = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
+                Repository.UpdateChats(_context, currentUser);
+
                 Repository.Messages.Clear();
                 var messages = _context.Messages.Include(m => m.Chat).Include(x => x.Chat.Users).Where(x => x.Chat.Id == Repository.CurrentChatId).ToList();
                 Repository.Messages = messages;
@@ -201,8 +202,7 @@ namespace WebChatExam.Controllers
                 chat.Users.Remove(user);
                 _context.SaveChanges();
 
-                var chats = _context.Chats.Where(x => x.Users.Contains(user)).Include(x => x.Users).Include(x => x.Messages).ToList();
-                Repository.Chats = chats;
+                Repository.UpdateChats(_context, user);
 
                 Repository.CurrentChatId = -1;
                 Repository.Messages.Clear();
