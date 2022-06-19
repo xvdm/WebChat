@@ -38,6 +38,12 @@ else {
                             <p>@message.Text</p>
                             <span class="message-time-right">@message.Time</span>
                         </div>
+                        @*<div class="message-container">
+                            <h6>CurrentChatId: @Repository.CurrentChatId</h6>
+                            <h6>message.Sender.Id: @message.Sender.Id</h6>
+                            <h6>@Repository.Chats.Where(x => x.Id == Repository.CurrentChatId).FirstOrDefault()?.Id</h6>
+                            <h6>@Repository.Chats.Where(x => x.Id == Repository.CurrentChatId).FirstOrDefault()?.Users.Where(y => y.Id == message.Sender.Id).FirstOrDefault()?.Login</h6>
+                        </div>*@
                     }
                 }
                 else
