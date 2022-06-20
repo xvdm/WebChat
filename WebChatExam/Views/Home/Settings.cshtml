@@ -1,5 +1,6 @@
 ﻿@model LoginModel
 @using Microsoft.AspNetCore.Http
+@using WebChatExam.Models.Repositories
 @{
     ViewData["Title"] = "Settings";
     Layout = "Layouts/_Layout";
@@ -9,6 +10,8 @@
 
 <div class="profile-edit" id="SettingsPageDiv">
     <form method="post" asp-antiforgery="true" asp-controller="Home" asp-action="UpdateUserInfo" enctype="multipart/form-data">
+        <br />
+        <h2 style="text-align:center">@CurrentUser.Login</h2>
         <br />
         <div class="photo-container">
             <img src=@Url.Content(CurrentUser.PhotoUrl) alt="Avatar" class="photo-image" id="currentImage">
@@ -22,18 +25,21 @@
     
         <div class="LoginPassword">
             <div>
+                <p style="text-align:center">Change login</p>
                 <label asp-for="Login"><b></b></label>
                 <input type="text" placeholder="Enter new Login" asp-for="Login" class="loginInput">
                 <span asp-validation-for="Login"/>
             </div>
             <br />
+            <br />
             <div>
+                <p style="text-align:center">Change password</p>
                 <label asp-for="Password"><b></b></label>
                 <input type="password" placeholder="Enter new Password" asp-for="Password" autocomplete="off" class="loginInput">
                 <span asp-validation-for="Password"/>
             </div>
             <hr>
-            <button type="submit" id="changePhotoBtn">Save</button>
+            <button type="submit" id="changePhotoBtn">Save all changes</button>
         </div>
     </form>
 </div>
