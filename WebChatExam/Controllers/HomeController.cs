@@ -26,27 +26,44 @@ namespace WebChatExam.Controllers
             _appEnvironment = appEnvironment;
         }
 
-        public IActionResult Index()
+
+        [HttpGet]
+        public IActionResult UpdateChatsList()
         {
             var user = _context.Users.Where(x => x.Id == CurrentUser.Id).FirstOrDefault();
             Repository.UpdateChats(_context, user);
+            return PartialView("ChatPartials/PartialChatsList");
+        }
 
-            if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
-            else return View();
+        [HttpGet]
+        public IActionResult UpdateMessages()
+        {
+            var messages = _context.Messages.Include(m => m.Chat).Include(x => x.Chat.Users).Where(x => x.Chat.Id == Repository.CurrentChatId).ToList();
+            Repository.Messages = messages;
+            return PartialView("ChatPartials/PartialMessages");
+        }
+
+        [HttpGet]
+        public IActionResult UpdateChatSettings()
+        {
+            return PartialView("ChatPartials/PartialChatSettings");
         }
 
         [HttpGet] 
         public IActionResult Chats()
         {
+            var user = _context.Users.Where(x => x.Id == CurrentUser.Id).FirstOrDefault();
+            Repository.UpdateChats(_context, user);
+
             if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
-            else return PartialView("IndexPartials/PartialChats");
+            else return PartialView();
         }
 
         [HttpGet]
         public IActionResult Settings()
         {
             if (CurrentUser.Id == 0) return RedirectToAction("Login", "Authorization");
-            else return PartialView("IndexPartials/PartialSettings");
+            else return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -86,13 +103,8 @@ namespace WebChatExam.Controllers
                 _context.SaveChanges();
                 Repository.Chats.Add(chat);
 
-                return PartialView("ChatPartials/PartialChatsList");
             }
-            else
-            {
-                var error = new ErrorViewModel();
-                return View("Error", error);
-            }
+            return PartialView("ChatPartials/PartialChatsList");
         }
 
         [HttpPost]
@@ -127,7 +139,7 @@ namespace WebChatExam.Controllers
             Repository.CurrentChatId = chatId;
             Repository.Messages = messages;
 
-            return PartialView("IndexPartials/PartialChats");
+            return PartialView("ChatPartials/PartialMessages");
         }
 
         [HttpPost]
@@ -165,11 +177,11 @@ namespace WebChatExam.Controllers
                     CurrentUser.EditUser(user);
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Chats");
         }
 
         [HttpPost]
-        public IActionResult AddUserToChat(string login)
+        public void AddUserToChat(string login)
         {
             var user = _context.Users.FirstOrDefault(x => x.Login == login);
             if (user is not null)
@@ -185,12 +197,13 @@ namespace WebChatExam.Controllers
                 Repository.Messages.Clear();
                 var messages = _context.Messages.Include(m => m.Chat).Include(x => x.Chat.Users).Where(x => x.Chat.Id == Repository.CurrentChatId).ToList();
                 Repository.Messages = messages;
+
+                Console.WriteLine("AddUserToChat " + login);
             }
-            return PartialView("IndexPartials/PartialChats");
         }
 
         [HttpPost]
-        public IActionResult LeaveChat(string captcha)
+        public void LeaveChat(string captcha)
         {
             if(Repository.CurrentChatId >= 0 && captcha == "LEAVE")
             {
@@ -199,17 +212,13 @@ namespace WebChatExam.Controllers
                 chat.Users.Remove(user);
                 _context.SaveChanges();
 
-                Repository.UpdateChats(_context, user);
-
                 Repository.CurrentChatId = -1;
-                Repository.Messages.Clear();
             }
-            return PartialView("IndexPartials/PartialChats");
         }
 
-        private static UInt64 CalculateHash(string read)
+        private static ulong CalculateHash(string read)
         {
-            UInt64 hashedValue = 3074457345618258791ul;
+            ulong hashedValue = 3074457345618258791ul;
             for (int i = 0; i < read.Length; i++)
             {
                 hashedValue += read[i];

@@ -65,7 +65,7 @@ namespace WebChatExam.Controllers
                     return View("Error", error);
                 }
                 CurrentUser.EditUser(user);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Chats", "Home");
             }
             else
             {
@@ -74,9 +74,9 @@ namespace WebChatExam.Controllers
             }
         }
 
-        private static UInt64 CalculateHash(string read)
+        private static ulong CalculateHash(string read)
         {
-            UInt64 hashedValue = 3074457345618258791ul;
+            ulong hashedValue = 3074457345618258791ul;
             for (int i = 0; i < read.Length; i++)
             {
                 hashedValue += read[i];

@@ -14,4 +14,8 @@
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.12" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Shared\IndexPartials\" />
+  </ItemGroup>
+
 </Project>

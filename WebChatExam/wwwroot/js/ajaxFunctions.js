@@ -1,41 +1,19 @@
-﻿function openChatsPage() {
-    $.ajax({
-        type: 'GET',
-        url: '/Home/Chats',
-        success: function (result) {
-            $("#IndexDiv").html(result);
-        }
-    })
-}
-
-function openSettingsPage() {
-    $.ajax({
-        type: 'GET',
-        url: '/Home/Settings',
-        success: function (result) {
-            $("#IndexDiv").html(result);
-        }
-    })
-}
-
-function sendMessage() {
+﻿function sendMessage() {
     var message = $("#messageInput").serialize();
     $.ajax({
         type: 'POST',
         url: '/Home/SendMessage',
         data: message,
-        async: false,
         success: function (result) {
             $("#messages").html(result);
-        }
-    })
-    $.ajax({
-        type: 'GET',
-        url: '/Home/Chats',
-        async: false,
-        success: function (result) {
-            $("#IndexDiv").html(result);
-            document.getElementById("messageInput").focus();
+            $.ajax({
+                type: 'GET',
+                url: '/Home/UpdateChatsList',
+                success: function (result) {
+                    $("#chats").html(result);
+                    document.getElementById("messageInput").focus();
+                }
+            })
         }
     })
 }
@@ -47,8 +25,15 @@ function openChat(id) {
         url: '/Home/OpenChat',
         data: { "id": id },
         success: function (result) {
-            $("#IndexDiv").html(result);
-            document.getElementById("messageInput").focus();
+            $("#messages").html(result);
+            $.ajax({
+                type: 'GET',
+                url: '/Home/UpdateChatsList',
+                success: function (result) {
+                    $("#chats").html(result);
+                    document.getElementById("messageInput").focus();
+                }
+            })
         }
     })
 }
@@ -71,8 +56,31 @@ function leaveChat() {
         type: 'POST',
         url: '/Home/LeaveChat',
         data: captcha,
-        success: function (result) {
-            $("#IndexDiv").html(result);
+        success: function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Home/UpdateChatsList',
+                success: function (result) {
+                    $("#chats").html(result);
+                    document.getElementById("messageInput").focus();
+                }
+            })
+            $.ajax({
+                type: 'GET',
+                url: '/Home/UpdateMessages',
+                success: function (result) {
+                    $("#messages").html(result);
+                    document.getElementById("messageInput").focus();
+                }
+            })
+            $.ajax({
+                type: 'GET',
+                url: '/Home/UpdateChatSettings',
+                success: function (result) {
+                    $("#settings").html(result);
+                    document.getElementById("messageInput").focus();
+                }
+            })
         }
     })
 }
@@ -83,8 +91,23 @@ function addUserToChat() {
         type: 'POST',
         url: '/Home/AddUserToChat',
         data: login,
-        success: function (result) {
-            $("#IndexDiv").html(result);
+        success: function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Home/UpdateChatSettings',
+                success: function (result) {
+                    $("#settings").html(result);
+                    document.getElementById("messageInput").focus();
+                }
+            })
+            $.ajax({
+                type: 'GET',
+                url: '/Home/UpdateMessages',
+                success: function (result) {
+                    $("#messages").html(result);
+                    document.getElementById("messageInput").focus();
+                }
+            })
         }
     })
 }
