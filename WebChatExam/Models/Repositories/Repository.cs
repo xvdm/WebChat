@@ -29,5 +29,10 @@ namespace WebChatExam.Models.Repositories
                     else return b.Messages.Last().Time.CompareTo(a.Messages.Last().Time);
                 });
         }
+
+        public static List<UserModel> GetUsersInCurrentChat()
+        {
+            return Chats.Where(x => x.Id == CurrentChatId).FirstOrDefault()?.Users;
+        }
     }
 }

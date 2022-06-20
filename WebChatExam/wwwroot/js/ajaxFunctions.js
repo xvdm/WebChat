@@ -31,6 +31,13 @@ function openChat(id) {
                 url: '/Home/UpdateChatsList',
                 success: function (result) {
                     $("#chats").html(result);
+                }
+            })
+            $.ajax({
+                type: 'GET',
+                url: '/Home/UpdateChatSettings',
+                success: function (result) {
+                    $("#settings").html(result);
                     document.getElementById("messageInput").focus();
                 }
             })
@@ -46,6 +53,7 @@ function createChat() {
         data: chatName,
         success: function (result) {
             $("#chats").html(result);
+            document.getElementById("messageInput").focus();
         }
     })
 }
@@ -62,7 +70,6 @@ function leaveChat() {
                 url: '/Home/UpdateChatsList',
                 success: function (result) {
                     $("#chats").html(result);
-                    document.getElementById("messageInput").focus();
                 }
             })
             $.ajax({
@@ -70,7 +77,6 @@ function leaveChat() {
                 url: '/Home/UpdateMessages',
                 success: function (result) {
                     $("#messages").html(result);
-                    document.getElementById("messageInput").focus();
                 }
             })
             $.ajax({
@@ -97,7 +103,6 @@ function addUserToChat() {
                 url: '/Home/UpdateChatSettings',
                 success: function (result) {
                     $("#settings").html(result);
-                    document.getElementById("messageInput").focus();
                 }
             })
             $.ajax({
