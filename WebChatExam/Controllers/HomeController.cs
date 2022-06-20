@@ -186,19 +186,29 @@ namespace WebChatExam.Controllers
             var user = _context.Users.FirstOrDefault(x => x.Login == login);
             if (user is not null)
             {
-                var chat = _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId);
-                user.Chats.Add(chat);
-                chat.Users.Add(user);
-                _context.SaveChanges();
+                bool contains = false;
+                foreach(var x in Repository.GetUsersInCurrentChat())
+                {
+                    if(x.Id == user.Id)
+                    {
+                        contains = true;
+                        break;
+                    }
+                }
+                if (contains == false)
+                {
+                    var chat = _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId);
+                    user.Chats.Add(chat);
+                    chat.Users.Add(user);
+                    _context.SaveChanges();
 
-                UserModel currentUser = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
-                Repository.UpdateChats(_context, currentUser);
+                    UserModel currentUser = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
+                    Repository.UpdateChats(_context, currentUser);
 
-                Repository.Messages.Clear();
-                var messages = _context.Messages.Include(m => m.Chat).Include(x => x.Chat.Users).Where(x => x.Chat.Id == Repository.CurrentChatId).ToList();
-                Repository.Messages = messages;
-
-                Console.WriteLine("AddUserToChat " + login);
+                    Repository.Messages.Clear();
+                    var messages = _context.Messages.Include(m => m.Chat).Include(x => x.Chat.Users).Where(x => x.Chat.Id == Repository.CurrentChatId).ToList();
+                    Repository.Messages = messages;
+                }
             }
         }
 
