@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -22,6 +23,11 @@ namespace WebChatExam.Models.Repositories
         public static void UpdateChats(ApplicationContext context, UserModel user)
         {
             Chats = context.Chats.Where(x => x.Users.Contains(user)).Include(x => x.Users).Include(x => x.Messages).ToList();
+            Chats.Sort(delegate(ChatModel a, ChatModel b) 
+                {
+                    if (a.Messages.LastOrDefault() == null || b.Messages.LastOrDefault() == null) return 0;
+                    else return b.Messages.Last().Time.CompareTo(a.Messages.Last().Time);
+                });
         }
     }
 }
