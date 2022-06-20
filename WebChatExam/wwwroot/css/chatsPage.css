@@ -1,6 +1,6 @@
 ﻿/* отключил скроллбар */
 ::-webkit-scrollbar {
-    width: 0;
+    display:none;
 }
 
 .chats {
@@ -24,13 +24,20 @@
     word-wrap:anywhere;
 }
 .chatSettings {
-    display: inline-block;
     height: 90%;
     width: 26%;
     float: right;
 }
 .chatsPage{
     width:100%;
+}
+#chatUsers {
+    width:100%;
+    height:37%;
+    position: fixed;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    word-wrap: anywhere;
 }
 
 
