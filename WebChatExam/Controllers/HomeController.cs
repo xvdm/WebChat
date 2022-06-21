@@ -24,6 +24,7 @@ namespace WebChatExam.Controllers
         {
             _context = context;
             _appEnvironment = appEnvironment;
+            Repository.SystemUser = _context.Users.FirstOrDefault(x=>x.Login == "SYSTEMLOGIN");
         }
 
 
@@ -96,6 +97,10 @@ namespace WebChatExam.Controllers
                 chat.Name = name;
                 chat.PhotoUrl = "~/images/default-chat.png";
 
+                Repository.SystemUser.Chats.Add(chat);
+                _context.Users.FirstOrDefault(x => x.Login == "SYSTEMLOGIN")?.Chats.Add(chat);
+                chat.Users.Add(Repository.SystemUser);
+
                 user.Chats.Add(chat);
                 chat.Users.Add(user);
 
@@ -123,7 +128,6 @@ namespace WebChatExam.Controllers
                 _context.Messages.Add(message);
                 _context.SaveChanges();
                 Repository.Messages.Add(message);
-                //Repository.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId).Messages.Add(message);
 
                 Repository.UpdateChats(_context, currentUser);
             }
@@ -200,6 +204,9 @@ namespace WebChatExam.Controllers
                     var chat = _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId);
                     user.Chats.Add(chat);
                     chat.Users.Add(user);
+
+                    chat.Messages.Add(new MessageModel() { Sender = Repository.SystemUser, Text = $"{CurrentUser.Login} adds {user.Login} to chat", Time = DateTime.Now });
+
                     _context.SaveChanges();
 
                     UserModel currentUser = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
@@ -219,6 +226,8 @@ namespace WebChatExam.Controllers
             {
                 ChatModel chat = _context.Chats.Where(x=> x.Id == Repository.CurrentChatId).Include(c=>c.Users).FirstOrDefault();
                 UserModel user = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
+
+                chat.Messages.Add(new MessageModel() { Sender = Repository.SystemUser, Text = $"{user.Login} left chat", Time = DateTime.Now});
                 chat.Users.Remove(user);
                 _context.SaveChanges();
 

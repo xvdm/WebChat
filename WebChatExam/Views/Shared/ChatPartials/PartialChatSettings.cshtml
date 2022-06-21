@@ -18,9 +18,12 @@
     {
         @foreach (var user in users)
         {
-            <div class="message-container">
-                <h6>@user.Login</h6>
-            </div>
+            if (user.Login != "SYSTEMLOGIN")
+            {
+                <div class="message-container">
+                    <h6>@user.Login</h6>
+                </div>
+            }
         }
     }
 </div>
