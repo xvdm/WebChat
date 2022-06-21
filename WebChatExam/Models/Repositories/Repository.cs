@@ -26,7 +26,9 @@ namespace WebChatExam.Models.Repositories
             Chats = context.Chats.Where(x => x.Users.Contains(user)).Include(x => x.Users).Include(x => x.Messages).ToList();
             Chats.Sort(delegate(ChatModel a, ChatModel b) 
                 {
-                    if (a.Messages.LastOrDefault() == null || b.Messages.LastOrDefault() == null) return 0;
+                    if (a.Messages.LastOrDefault() == null && b.Messages.LastOrDefault() == null) return 0;
+                    else if (a.Messages.LastOrDefault() == null) return 1;
+                    else if (b.Messages.LastOrDefault() == null) return -1;
                     else return b.Messages.Last().Time.CompareTo(a.Messages.Last().Time);
                 });
         }
