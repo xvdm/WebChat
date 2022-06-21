@@ -3,19 +3,19 @@
     List<UserModel> users = Repository.GetUsersInCurrentChat();
 }
 
-<form class="inputLine">
-    <input type="text" placeholder="Enter login of user you want to add" name="login" autocomplete="off" id="loginAddToChat">
-    <button type="button" onclick="addUserToChat()" id="addUserToChatButton">Add</button>
-</form>
-<form class="inputLine">
-     <input type="text" placeholder="Enter 'LEAVE' to leave chat" name="captcha" id="captchaForLeavingChat" autocomplete="off">
-     <button type="button" onclick="leaveChat()" id="leaveChatButton">Leave</button>
-</form>
-<div id="chatUsers">
-    <br>
-    <h2>Chat members: </h2>
-    @if (users is not null)
-    {
+@if (Repository.CurrentChatId >= 0)
+{
+    <form class="inputLine">
+        <input type="text" placeholder="Enter login of user you want to add" name="login" autocomplete="off" id="loginAddToChat">
+        <button type="button" onclick="addUserToChat()" id="addUserToChatButton">Add</button>
+    </form>
+    <form class="inputLine">
+         <input type="text" placeholder="Enter 'LEAVE' to leave chat" name="captcha" id="captchaForLeavingChat" autocomplete="off">
+         <button type="button" onclick="leaveChat()" id="leaveChatButton">Leave</button>
+    </form>
+    <div id="chatUsers">
+        <br>
+        <h2>Chat members: </h2>
         @foreach (var user in users)
         {
             if (user.Login != "SYSTEMLOGIN")
@@ -25,44 +25,16 @@
                 </div>
             }
         }
-        @foreach (var user in users)
-        {
-            if (user.Login != "SYSTEMLOGIN")
-            {
-                <div class="message-container">
-                    <h6>@user.Login</h6>
-                </div>
-            }
-        }
-        @foreach (var user in users)
-        {
-            if (user.Login != "SYSTEMLOGIN")
-            {
-                <div class="message-container">
-                    <h6>@user.Login</h6>
-                </div>
-            }
-        }
-        @foreach (var user in users)
-        {
-            if (user.Login != "SYSTEMLOGIN")
-            {
-                <div class="message-container">
-                    <h6>@user.Login</h6>
-                </div>
-            }
-        }
-    }
-</div>
+    </div>
 
-
-<form method="post" asp-antiforgery="true" asp-controller="Home" asp-action="UpdateChatPhoto" enctype="multipart/form-data" class="chat-photo-edit">
-    <div class="photo-container">
-        <img src=@Url.Content(Repository.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId)?.PhotoUrl) alt="Avatar" class="photo-image" id="currentChatImage">
-        <div class="photo-overlay">
-            <input type="file" accept="image/*" name="uploadFile" class="changePhotoSubmit" onchange="changeChatPhoto()" id="chatPhotoInput"/>
-            <p class="photo-text">Change photo</p>
-        </div>
-    </div> 
-    <button type="submit" id="changeChatPhotoBtn">Save chat photo</button>
-</form>
+    <form method="post" asp-antiforgery="true" asp-controller="Home" asp-action="UpdateChatPhoto" enctype="multipart/form-data" class="chat-photo-edit">
+        <div class="photo-container">
+            <img src=@Url.Content(Repository.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId)?.PhotoUrl) alt="Avatar" class="photo-image" id="currentChatImage">
+            <div class="photo-overlay">
+                <input type="file" accept="image/*" name="uploadFile" class="changePhotoSubmit" onchange="changeChatPhoto()" id="chatPhotoInput"/>
+                <p class="photo-text">Change photo</p>
+            </div>
+        </div> 
+        <button type="submit" id="changeChatPhotoBtn">Save chat photo</button>
+    </form>  
+}
