@@ -103,11 +103,13 @@ form.inputLine button {
     color: var(--text);
     border: 1px solid black;
 }
-
-
+#changeChatPhotoBtn {
+    background: var(--semi-dark);
+    color: var(--text);
+    border: 1px solid black;
+}
 
 /* messages */
-
 .message-container {
     border: 2px solid black;
     background-color: var(--dark);

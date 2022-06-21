@@ -41,3 +41,7 @@ document.addEventListener('keydown', function (event) {
 function changePhoto() {
     document.getElementById("currentImage").src = URL.createObjectURL(document.getElementById("photoInput").files[0]);
 }
+
+function changeChatPhoto() {
+    document.getElementById("currentChatImage").src = URL.createObjectURL(document.getElementById("chatPhotoInput").files[0]);
+}

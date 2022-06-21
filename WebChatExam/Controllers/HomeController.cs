@@ -235,6 +235,24 @@ namespace WebChatExam.Controllers
             }
         }
 
+        [HttpPost] 
+        public async Task<IActionResult> UpdateChatPhoto(IFormFile uploadFile)
+        {
+            if (uploadFile != null)
+            {
+                string filetype = uploadFile.FileName.Substring(uploadFile.FileName.LastIndexOf('.') + 1);
+                string path = $"/images/{Repository.CurrentChatId}.{filetype}";
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadFile.CopyToAsync(fileStream);
+                }
+                _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId).PhotoUrl = path;
+                _context.SaveChanges();
+            }
+            return View("Chats");
+        }
+
+
         private static ulong CalculateHash(string read)
         {
             ulong hashedValue = 3074457345618258791ul;
