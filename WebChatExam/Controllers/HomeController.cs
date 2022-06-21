@@ -205,7 +205,8 @@ namespace WebChatExam.Controllers
                     user.Chats.Add(chat);
                     chat.Users.Add(user);
 
-                    chat.Messages.Add(new MessageModel() { Sender = Repository.SystemUser, Text = $"{CurrentUser.Login} adds {user.Login} to chat", Time = DateTime.Now });
+                    string systemMessage = $"{CurrentUser.Login} adds {user.Login} to chat";
+                    SendSystemMessage(systemMessage);
 
                     _context.SaveChanges();
 
@@ -227,7 +228,9 @@ namespace WebChatExam.Controllers
                 ChatModel chat = _context.Chats.Where(x=> x.Id == Repository.CurrentChatId).Include(c=>c.Users).FirstOrDefault();
                 UserModel user = _context.Users.FirstOrDefault(x => x.Id == CurrentUser.Id);
 
-                chat.Messages.Add(new MessageModel() { Sender = Repository.SystemUser, Text = $"{user.Login} left chat", Time = DateTime.Now});
+                string systemMessage = $"{user.Login} left chat";
+                SendSystemMessage(systemMessage);
+
                 chat.Users.Remove(user);
                 _context.SaveChanges();
 
@@ -247,11 +250,29 @@ namespace WebChatExam.Controllers
                     await uploadFile.CopyToAsync(fileStream);
                 }
                 _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId).PhotoUrl = path;
+
+                string systemMessage = $"{CurrentUser.Login} changed chat photo";
+                SendSystemMessage(systemMessage);
+
                 _context.SaveChanges();
             }
-            return View("Chats");
+            return RedirectToAction("Chats");
         }
 
+
+        private void SendSystemMessage(string text)
+        {
+            var message = new MessageModel()
+            {
+                Sender = Repository.SystemUser,
+                Text = text,
+                Time = DateTime.Now
+            };
+            Repository.Messages.Add(message);
+            ChatModel chat = _context.Chats.FirstOrDefault(x => x.Id == Repository.CurrentChatId);
+            chat.Messages.Add(message);
+            _context.SaveChanges();
+        }
 
         private static ulong CalculateHash(string read)
         {
