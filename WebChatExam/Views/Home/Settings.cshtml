@@ -27,7 +27,7 @@
             <div>
                 <p style="text-align:center">Change login</p>
                 <label asp-for="Login"><b></b></label>
-                <input type="text" placeholder="Enter new Login" asp-for="Login" class="loginInput">
+                <input type="text" placeholder="Enter new Login" asp-for="Login" class="loginInput" value="@CurrentUser.Login">
                 <span asp-validation-for="Login"/>
             </div>
             <br />
