@@ -34,9 +34,10 @@
                         <input type="password" placeholder="Enter Password" asp-for="Password">
                         <span asp-validation-for="Password"/>
                     </div>
-
+                    
                     <hr>
 
+                    <input type="hidden" asp-for="Email" value="systemmail@gmail.com">
                     <button type="submit" class="registerbtn">Login</button>
                 </div>
 

@@ -9,6 +9,7 @@ namespace WebChatExam.Models
         public string Login { get; set; }
         public string PasswodHash { get; set; }
         public string PhotoUrl { get; set; }
+        public string Email { get; set; }
         public List<ChatModel> Chats { get; set; } = new List<ChatModel>();
     }
 }

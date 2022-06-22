@@ -31,12 +31,18 @@
                 <span asp-validation-for="Login"/>
             </div>
             <br />
-            <br />
             <div>
                 <p style="text-align:center">Change password</p>
                 <label asp-for="Password"><b></b></label>
                 <input type="password" placeholder="Enter new Password" asp-for="Password" autocomplete="off" class="loginInput">
                 <span asp-validation-for="Password"/>
+            </div>
+            <br />
+            <div>
+                <p style="text-align:center">Change email</p>
+                <label asp-for="Email"><b></b></label>
+                <input type="text" placeholder="Enter new Email" asp-for="Email" autocomplete="off" class="loginInput" value="@CurrentUser.Email">
+                <span asp-validation-for="Email"/>
             </div>
             <hr>
             <button type="submit" id="changePhotoBtn">Save all changes</button>

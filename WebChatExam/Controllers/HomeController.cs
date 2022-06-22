@@ -163,23 +163,21 @@ namespace WebChatExam.Controllers
                     _context.Users.Where(x => x.Id == CurrentUser.Id).FirstOrDefault().PhotoUrl = path;
                     _context.SaveChanges();
                 } 
-                if (model.Login != CurrentUser.Login)
+                // логин - уникальный
+                if (_context.Users.Where(x => x.Login == model.Login).Any())
                 {
-                    // логин - уникальный
-                    if (_context.Users.Where(x => x.Login == model.Login).Any())
-                    {
-                        var error = new ErrorViewModel();
-                        //return View("Error", error);
-                    }
-                    UserModel user = new UserModel();
-                    user.Login = model.Login;
-                    user.PasswodHash = CalculateHash(model.Password).ToString();
-                    user.PhotoUrl = CurrentUser.PhotoUrl;
-                    user.Id = CurrentUser.Id;
-                    _context.Users.Update(user);
-                    _context.SaveChanges();
-                    CurrentUser.EditUser(user);
+                    var error = new ErrorViewModel();
+                    //return View("Error", error);
                 }
+                UserModel user = new UserModel();
+                user.Login = model.Login;
+                user.PasswodHash = CalculateHash(model.Password).ToString();
+                user.PhotoUrl = CurrentUser.PhotoUrl;
+                user.Id = CurrentUser.Id;
+                user.Email = model.Email;
+                _context.Users.Update(user);
+                _context.SaveChanges();
+                CurrentUser.EditUser(user);
             }
             return RedirectToAction("Chats");
         }
