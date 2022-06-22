@@ -160,9 +160,8 @@ namespace WebChatExam.Controllers
                         await uploadFile.CopyToAsync(fileStream);
                     }
                     CurrentUser.UpdatePhoto(path);
-                    _context.Users.Where(x => x.Id == CurrentUser.Id).FirstOrDefault().PhotoUrl = path;
-                    _context.SaveChanges();
-                } 
+                }
+                
                 // логин - уникальный
                 if (_context.Users.Where(x => x.Login == model.Login).Any())
                 {
@@ -170,14 +169,15 @@ namespace WebChatExam.Controllers
                     //return View("Error", error);
                 }
                 UserModel user = new UserModel();
-                user.Login = model.Login;
-                user.PasswodHash = CalculateHash(model.Password).ToString();
-                user.PhotoUrl = CurrentUser.PhotoUrl;
                 user.Id = CurrentUser.Id;
+                user.PhotoUrl = CurrentUser.PhotoUrl;
+                user.Login = model.Login;
                 user.Email = model.Email;
+                user.PasswodHash = CalculateHash(model.Password).ToString();
                 _context.Users.Update(user);
-                _context.SaveChanges();
                 CurrentUser.EditUser(user);
+
+                _context.SaveChanges();
             }
             return RedirectToAction("Chats");
         }
