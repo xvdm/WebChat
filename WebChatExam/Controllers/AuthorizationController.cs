@@ -1,9 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using WebChatExam.Models;
 using WebChatExam.Models.Chats;
 using WebChatExam.Models.Repositories;
+using System.Net;
+using System.Net.Mime;
+using System.Threading;
+using MimeKit;
+using MimeKit.Text;
+using MailKit.Security;
+using MailKit.Net.Smtp;
 
 namespace WebChatExam.Controllers
 {
@@ -82,6 +90,22 @@ namespace WebChatExam.Controllers
         [HttpPost]
         public IActionResult GetEmailAction(string login, string email)
         {
+            if(_context.Users.FirstOrDefault(x=>x.Login == login)?.Email == email)
+            {
+                // create email message
+                var message = new MimeMessage();
+                message.From.Add(MailboxAddress.Parse("herta.kulas83@ethereal.email"));
+                message.To.Add(MailboxAddress.Parse(email));
+                message.Subject = "Your new password";
+                message.Body = new TextPart(TextFormat.Plain) { Text = "Your new password in Chat is: " };
+
+                // send email
+                using var smtp = new SmtpClient();
+                smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
+                smtp.Authenticate("herta.kulas83@ethereal.email", "Wzs2WEnZ3czb6BxsUb");
+                smtp.Send(message);
+                smtp.Disconnect(true);
+            }
             return RedirectToAction("Login");
         }
 
