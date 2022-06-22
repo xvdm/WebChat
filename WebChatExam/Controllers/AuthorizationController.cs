@@ -26,6 +26,11 @@ namespace WebChatExam.Controllers
             var loginModel = new LoginModel();
             return View(loginModel);
         }
+        public IActionResult GetEmail()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public IActionResult RegisterAction(RegisterModel registerModel)
@@ -72,6 +77,12 @@ namespace WebChatExam.Controllers
                 var error = new ErrorViewModel();
                 return View("Error", error);
             }
+        }
+        
+        [HttpPost]
+        public IActionResult GetEmailAction(string login, string email)
+        {
+            return RedirectToAction("Login");
         }
 
         private static ulong CalculateHash(string read)

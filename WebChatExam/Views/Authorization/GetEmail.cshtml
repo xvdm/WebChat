@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Get an email";
+    Layout = "Layouts/_AuthorizationLayout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"]</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/authorization.css" />
+    </head>
+    <body>
+        <div class="text-center">
+            <br />
+            <form method="post" asp-antiforgery="true" asp-controller="Authorization" asp-action="GetEmailAction">
+                <div class="container forms">
+                    <h1>Get an email</h1>
+                    <p>Please fill in this form to receive an e-mail with a new password.</p>
+                    <hr>
+
+                    <div>
+                        <label><b>Login</b></label>
+                        <input type="text" placeholder="Enter your login" name="login">
+                    </div>
+
+                    <div>
+                        <label><b>E-mail</b></label>
+                        <input type="text" placeholder="Enter linked e-mail" name="email">
+                    </div>
+
+                    <hr>
+
+                    <button type="submit" class="registerbtn">Get an e-mail</button>
+                </div>
+            </form>
+            <div class="container signin">
+                    <a asp-controller="Authorization" asp-action="Login">Back to Login</a>
+            </div>
+        </div>
+    </body>
+</html>
