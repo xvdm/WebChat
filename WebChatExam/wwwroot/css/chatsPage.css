@@ -115,7 +115,7 @@ form.inputLine::after {
     font-size: 20px;
     padding: 20px;
     text-align: center;
-    border-radius: 5%;
+    border-radius: 2%;
     cursor: pointer;
 }
 
