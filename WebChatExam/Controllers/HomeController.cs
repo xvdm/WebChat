@@ -154,7 +154,7 @@ namespace WebChatExam.Controllers
                 if(uploadFile != null)
                 {
                     string filetype = uploadFile.FileName.Substring(uploadFile.FileName.LastIndexOf('.') + 1);
-                    string path = $"/images/{CurrentUser.Id}.{filetype}";
+                    string path = $"/images/user_{CurrentUser.Id}.{filetype}";
                     using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                     {
                         await uploadFile.CopyToAsync(fileStream);
@@ -242,7 +242,7 @@ namespace WebChatExam.Controllers
             if (uploadFile != null)
             {
                 string filetype = uploadFile.FileName.Substring(uploadFile.FileName.LastIndexOf('.') + 1);
-                string path = $"/images/{Repository.CurrentChatId}.{filetype}";
+                string path = $"/images/chat_{Repository.CurrentChatId}.{filetype}";
                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
                     await uploadFile.CopyToAsync(fileStream);
