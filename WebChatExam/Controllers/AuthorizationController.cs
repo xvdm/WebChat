@@ -12,6 +12,7 @@ using MimeKit;
 using MimeKit.Text;
 using MailKit.Security;
 using MailKit.Net.Smtp;
+using System.Threading.Tasks;
 
 namespace WebChatExam.Controllers
 {
