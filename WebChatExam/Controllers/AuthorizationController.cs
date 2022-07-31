@@ -23,7 +23,7 @@ namespace WebChatExam.Controllers
         public AuthorizationController(ApplicationContext context)
         {
             _context = context;
-        }
+        } 
 
         public IActionResult Register()
         {
