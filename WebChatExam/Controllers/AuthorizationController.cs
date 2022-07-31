@@ -95,7 +95,7 @@ namespace WebChatExam.Controllers
             {
                 // create email message
                 var message = new MimeMessage();
-                message.From.Add(MailboxAddress.Parse("herta.kulas83@ethereal.email"));
+                message.From.Add(MailboxAddress.Parse("p34b7dgmpvx7yvwd@ethereal.email"));
                 message.To.Add(MailboxAddress.Parse(email));
                 message.Subject = "Your new password";
                 message.Body = new TextPart(TextFormat.Plain) { Text = "Your new password in Chat is: " };
@@ -103,7 +103,7 @@ namespace WebChatExam.Controllers
                 // send email
                 using var smtp = new SmtpClient();
                 smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
-                smtp.Authenticate("herta.kulas83@ethereal.email", "Wzs2WEnZ3czb6BxsUb");
+                smtp.Authenticate("p34b7dgmpvx7yvwd@ethereal.email", "Y3HHuZ9BrGUquzTqVf");
                 smtp.Send(message);
                 smtp.Disconnect(true);
             }
